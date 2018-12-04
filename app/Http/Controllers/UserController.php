@@ -13,7 +13,6 @@ class UserController extends Controller
     public function show($type, $id)
     {	
     	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'
-    	
     	$user = User::where('type', $type == 'restaurateur' ? 0 : 1)->where('id', $id)->firstOrFail();
 
     	if ($type == 'restaurateur') {
