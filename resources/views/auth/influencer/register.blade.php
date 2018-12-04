@@ -13,7 +13,7 @@
                         
                         <input type="hidden" name="type" value="1">
 
-                        @include('auth.forms.register_form')
+                        @include('forms.register_form')
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

@@ -43,4 +43,15 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Influencer', 'user_id');
     }
+
+    public function getTypeLabelAttribute()
+    {
+        if ($this->type == 0) {
+            $type = "restaurateur";
+        } else if ($this->type == 1) {
+            $type = "influencer";
+        }
+
+        return $type;
+    }
 }

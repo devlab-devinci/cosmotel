@@ -42,3 +42,20 @@ Route::get('/influencer', [
 	'as' => 'influencer',
 	'uses' => 'InfluencerController@index'
 ]);
+
+Route::get('/{type}/{id}', [
+	'as' => 'user.show',
+	'uses' => 'UserController@show'
+]);
+
+Route::get('/{type}/{id}/edit', [
+	'as' => 'user.edit',
+	'uses' => 'UserController@edit'
+]);
+
+
+
+
+
+
+
