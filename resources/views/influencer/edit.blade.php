@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Edition de votre profil</div>
                 
-                <form method="POST" action="{{ route('register.register') }}">
+                <form method="POST" action="{{ route('user.update', ['id' => $user->id, 'type' => $user->typeLabel]) }}">
                     @csrf
                     
                     @include('forms.edit_form')

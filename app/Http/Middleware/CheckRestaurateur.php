@@ -15,6 +15,7 @@ class CheckRestaurateur
      */
     public function handle($request, Closure $next)
     {
+        dd($request->type);
         if ($request->type == 1) {
             return redirect()->route('influencer');
         } else if ($request->type != 0) {

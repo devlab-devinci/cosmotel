@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class CheckInfluencer
 {
@@ -17,7 +18,7 @@ class CheckInfluencer
     {
         if ($request->type == 0) {
             return redirect()->route('restaurateur');
-        } else if ($request->type !=1 ) {
+        } else if ($request->type != 1 || $request->type == null) {
             return redirect()->route('home');
         }
         return $next($request);

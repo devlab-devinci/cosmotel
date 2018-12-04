@@ -1,3 +1,5 @@
+@method('PUT')
+
 <div class="form-group row">
     <label for="firstname" class="col-md-4 col-form-label text-md-right">Firstname</label>
 

@@ -23,14 +23,28 @@ Route::get('/register', function() {
 	return redirect('/register/influencer');
 })->name('register');
 
+Route::get('/login', function() {
+	return redirect('/login/influencer');
+})->name('login');
+
 Route::post('/register', [
 	'as' => 'register.register',
 	'uses' => 'Auth\RegisterController@register'
 ]);
 
+Route::post('/login', [
+	'as' => 'login.login',
+	'uses' => 'Auth\LoginController@login'
+]);
+
 Route::get('/register/{type}', [
 	'as' => 'register.show',
 	'uses' => 'Auth\RegisterController@showRegisterForm'
+]);
+
+Route::get('/login/{type}', [
+	'as' => 'login.show',
+	'uses' => 'Auth\LoginController@showLoginForm'
 ]);
 
 Route::get('/restaurateur', [
@@ -51,6 +65,11 @@ Route::get('/{type}/{id}', [
 Route::get('/{type}/{id}/edit', [
 	'as' => 'user.edit',
 	'uses' => 'UserController@edit'
+]);
+
+Route::put('/{type}/{id}', [
+	'as' => 'user.update',
+	'uses' => 'UserController@update'
 ]);
 
 
