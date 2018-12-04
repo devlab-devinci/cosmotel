@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    @if(Auth::user()->id == $user->id)
+                    @if(Auth::check() && Auth::user()->id == $user->id)
                         Your profil
                     @else
-                       {{ $user->firstname }}'s profil'
+                       {{ $user->firstname }}'s profil
                     @endif
                 </div>
                 
@@ -33,7 +33,7 @@
                     <div class="card-subtitle">User type :</div>
                     <div class="card-title">Restaurateur</div>
                 </div>
-                @if(Auth::user()->id == $user->id)
+                @if(Auth::check() && Auth::user()->id == $user->id)
                 <div class="card-body">
                     <a href="{{ route('user.edit', ['id' => $user->id, 'type' => $user->typeLabel]) }}" class="btn btn-primary">Edit</a>
                 </div>

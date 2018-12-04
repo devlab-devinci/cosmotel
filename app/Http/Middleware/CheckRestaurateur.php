@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class CheckRestaurateur
 {
@@ -15,10 +16,9 @@ class CheckRestaurateur
      */
     public function handle($request, Closure $next)
     {
-        dd($request->type);
-        if ($request->type == 1) {
+        if (Auth::user()->type == 1) {
             return redirect()->route('influencer');
-        } else if ($request->type != 0) {
+        } else if (Auth::user()->type != 0) {
             return redirect()->route('home');
         }
         return $next($request);

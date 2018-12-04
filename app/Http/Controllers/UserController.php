@@ -11,8 +11,10 @@ use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function show($type, $id)
-    {
-    	$user = User::findOrFail($id);
+    {	
+    	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'
+    	
+    	$user = User::where('type', $type == 'restaurateur' ? 0 : 1)->where('id', $id)->firstOrFail();
 
     	if ($type == 'restaurateur') {
     		return view('restaurateur.show', compact('user'));
