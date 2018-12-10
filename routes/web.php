@@ -72,9 +72,4 @@ Route::put('/{type}/{id}', [
 	'uses' => 'UserController@update'
 ]);
 
-
-
-
-
-
-
+Route::get('/restaurants', 'RestaurantsController@index')->name('restaurants');
