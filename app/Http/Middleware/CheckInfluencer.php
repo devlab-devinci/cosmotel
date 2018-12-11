@@ -18,7 +18,7 @@ class CheckInfluencer
     {
             if (Auth::check() && Auth::user()->type == 0) {
                 return redirect()->route('restaurateur');
-            } else {
+            } else if (!Auth::check()) {
                 return redirect()->route('home');
             }
         

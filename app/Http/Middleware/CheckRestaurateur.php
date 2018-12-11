@@ -17,8 +17,8 @@ class CheckRestaurateur
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->type == 1) {
-            return redirect()->route('restaurateur');
-        } else {
+            return redirect()->route('influencer');
+        } else if (!Auth::check()) {
             return redirect()->route('home');
         }
         return $next($request);
