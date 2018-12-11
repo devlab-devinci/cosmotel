@@ -16,11 +16,12 @@ class CheckInfluencer
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->type == 0) {
-            return redirect()->route('restaurateur');
-        } else if (Auth::user()->type != 1) {
-            return redirect()->route('home');
-        }
+            if (Auth::check() && Auth::user()->type == 0) {
+                return redirect()->route('restaurateur');
+            } else {
+                return redirect()->route('home');
+            }
+        
         return $next($request);
     }
 }
