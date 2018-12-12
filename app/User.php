@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'lastname', 'email', 'phone', 'type', 'password',
     ];
 
     /**
@@ -27,4 +27,31 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the restaurateur record associated with the user.
+     */
+    public function restaurateur()
+    {
+        return $this->hasOne('App\Restaurateur', 'user_id');
+    }
+
+    /**
+     * Get the influencer record associated with the user.
+     */
+    public function influencer()
+    {
+        return $this->hasOne('App\Influencer', 'user_id');
+    }
+
+    public function getTypeLabelAttribute()
+    {
+        if ($this->type == 0) {
+            $type = "restaurateur";
+        } else if ($this->type == 1) {
+            $type = "influencer";
+        }
+
+        return $type;
+    }
 }

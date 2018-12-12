@@ -6,7 +6,7 @@
 
 @section('super_content')
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+    <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: red">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -58,19 +58,7 @@
     </nav>
 
     <main class="py-4">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Home</div>
-
-                        <div class="card-body">
-                            Bienvenue !
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @yield('content')
     </main>
 </div>
 @endsection
@@ -78,4 +66,3 @@
 @section('js')
 
 @endsection
-
