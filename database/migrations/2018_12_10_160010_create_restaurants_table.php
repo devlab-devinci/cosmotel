@@ -18,6 +18,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('titre');
             $table->string('adresse');
             $table->text('description');
+            $table->decimal('lat', 10, 8);
+            $table->decimal('long', 11, 8);
+            $table->string('tags');
             $table->timestamps();
         });
     }
