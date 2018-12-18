@@ -15,12 +15,15 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titre');
-            $table->string('adresse');
+            $table->string('title');
+            $table->string('address');
             $table->text('description');
             $table->decimal('lat', 10, 8);
             $table->decimal('long', 11, 8);
-            $table->string('tags');
+            $table->integer('restaurateur_id')->unsigned();
+            $table->foreign('restaurateur_id')->references('id')->on('restaurateurs')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -32,6 +35,10 @@ class CreateRestaurantsTable extends Migration
      */
     public function down()
     {
+        Schema::table('restaurants', function(Blueprint $table) {
+            $table->dropForeign('restaurants_restaurateur_id_foreign');
+        });
+
         Schema::dropIfExists('restaurants');
     }
 }

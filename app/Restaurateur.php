@@ -22,4 +22,12 @@ class Restaurateur extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    /**
+     * Get restaurants list for the restaurateur.
+     */
+    public function restaurant()
+    {
+        return $this->hasOne('App\Restaurant');
+    }
 }

@@ -6,10 +6,13 @@
         <div class="restaurants--list">
             @foreach ($restaurants as $restaurant)
                 <div style="margin: 20px">
-                    <p>{{ $restaurant->titre }}</p>
+                    <p>{{ $restaurant->title }}</p>
                     <p>{{ $restaurant->description }}</p>
-                    <p>{{ $restaurant->adresse }}</p>
+                    <p>{{ $restaurant->address }}</p>
                     <p>{{ $restaurant->id }}</p>
+                    <p>{{ $restaurant->restaurateur->user->firstname }}</p>
+                    <p>{{ $restaurant->services }}</p>
+                    <p>{{ $restaurant->kitchens }}</p>
                 </div>
             @endforeach
         </div>

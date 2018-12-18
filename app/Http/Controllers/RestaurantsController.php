@@ -23,7 +23,7 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        $restaurants = \App\Restaurants::all()->random(5);
+        $restaurants = \App\Restaurant::all();
 
         return view('restaurants.index', ['restaurants' => $restaurants]);
     }
