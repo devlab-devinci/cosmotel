@@ -37,4 +37,12 @@ class Restaurateur extends Model
     {
         return $this->firstname.' '.$this->lastname;
     }
+
+    /**
+     * Get restaurants list for the restaurateur.
+     */
+    public function restaurant()
+    {
+        return $this->hasOne('App\Restaurant');
+    }
 }

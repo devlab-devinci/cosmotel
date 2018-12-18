@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Restaurant;
 
-class RestaurantsTableSeeder extends Seeder
+class RestaurateursTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class RestaurantsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Restaurant::class, 7)->create();
+        factory(App\Restaurateur::class, 5)->create();
     }
 }

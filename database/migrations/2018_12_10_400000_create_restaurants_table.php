@@ -15,14 +15,15 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('restaurateur_id')->unsigned();
-            $table->foreign('restaurateur_id')->references('id')->on('restaurateurs')->onDelete('restrict');
-            $table->string('label');
+            $table->string('title');
             $table->string('address');
             $table->text('description');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->string('tags');
+            $table->integer('restaurateur_id')->unsigned();
+            $table->foreign('restaurateur_id')->references('id')->on('restaurateurs')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->timestamps();
         });
     }
