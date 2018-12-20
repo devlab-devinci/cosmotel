@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class InfluencersTableSeeder extends Seeder
+class ReservationsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class InfluencersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Influencer::class, 5)->create();
+        factory(App\Reservation::class, 5)->create();
     }
 }

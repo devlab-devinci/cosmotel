@@ -29,6 +29,14 @@ class Restaurant extends Model
     }
 
     /**
+     * Get the menu extract for the restaurant
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
+
+    /**
      * Get the restaurateur that owns the restaurant.
      */
     public function restaurateur()
