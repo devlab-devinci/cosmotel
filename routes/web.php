@@ -57,19 +57,82 @@ Route::get('/influencer', [
 	'uses' => 'InfluencerController@index'
 ]);
 
-Route::get('/{type}/{id}', [
-	'as' => 'user.show',
+//////// RESTAURATEUR
+// Route::get('/restaurateur/{id}', [
+// 	'as' => 'restaurateur.show',
+// 	'uses' => 'UserController@show'
+// ]);
+
+
+Route::group(
+    [
+        'prefix'     => 'restaurateur',
+        'as'         => 'restaurateur.',
+    ], function () {
+    	Route::get('/{id}', [
+			'as' => 'show',
+			'uses' => 'UserController@show'
+		]);
+
+		Route::get('/{id}/edit', [
+			'as' => 'edit',
+			'uses' => 'UserController@edit'
+		]);
+
+		Route::put('/{id}', [
+			'as' => 'update',
+			'uses' => 'UserController@update'
+		]);
+});
+
+
+
+
+
+/////// INFLUENCER
+Route::get('/influencer/{id}', [
+	'as' => 'influencer.show',
 	'uses' => 'UserController@show'
 ]);
 
-Route::get('/{type}/{id}/edit', [
-	'as' => 'user.edit',
+Route::get('/influencer/{id}/edit', [
+	'as' => 'influencer.edit',
 	'uses' => 'UserController@edit'
 ]);
 
-Route::put('/{type}/{id}', [
-	'as' => 'user.update',
+Route::put('/influencer/{id}', [
+	'as' => 'influencer.update',
 	'uses' => 'UserController@update'
 ]);
 
-Route::get('/restaurants', 'RestaurantsController@index')->name('restaurants');
+
+/////
+
+Route::get('/restaurants', [
+	'as' => 'restaurants',
+	'uses' => 'RestaurantController@index'
+]);
+
+Route::get('/messages', [
+	'as' => 'messages',
+	'uses' => 'UserController@messages'
+]);
+
+Route::get('/reservations', [
+	'as' => 'reservations',
+	'uses' => 'UserController@reservations'
+]);
+
+Route::get('/helps', [
+	'as' => 'helps',
+	'uses' => 'HomeController@helps'
+]);
+
+
+
+
+
+
+
+
+

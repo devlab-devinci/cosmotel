@@ -44,6 +44,14 @@ class User extends Authenticatable
         return $this->hasOne('App\Influencer', 'user_id');
     }
 
+    /**
+     * Get the influencer record associated with the user.
+     */
+    public function restaurants()
+    {
+        return $this->hasOne('App\Restaurant', 'restaurant_id');
+    }
+
     public function getTypeLabelAttribute()
     {
         if ($this->type == 0) {

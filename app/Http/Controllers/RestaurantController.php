@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Restaurant;
 
-class RestaurantsController extends Controller
+class RestaurantController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,8 +24,8 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        $restaurants = \App\Restaurants::all()->random(5);
+        $restaurants = Restaurant::all()->random(5);
 
-        return view('restaurants.index', ['restaurants' => $restaurants]);
+        return view('restaurant.index', ['restaurants' => $restaurants]);
     }
 }

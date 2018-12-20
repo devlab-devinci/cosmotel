@@ -1,4 +1,4 @@
-@extends('restaurants.layouts.app')
+@extends('restaurant.layouts.app')
 
 @section('content')
 <div class="flex-center position-ref full-height">
