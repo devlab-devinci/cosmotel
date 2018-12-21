@@ -8,50 +8,75 @@ use App\Influencer;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 
+use Auth;
+
+
 class UserController extends Controller
 {
-    public function show($type, $id)
+    public function show($id)
     {	
     	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'
-    	$user = User::where('type', $type == 'restaurateur' ? 0 : 1)->where('id', $id)->firstOrFail();
+    	$user = User::where('id', $id)->firstOrFail();
 
-    	if ($type == 'restaurateur') {
+    	if (Auth::user()->type == 0) {
     		return view('restaurateur.show', compact('user'));
-    	} else if ($type == 'influencer') {
+    	} else if (Auth::user()->type == 1) {
     		return view('influencer.show', compact('user'));
     	}
     }
 
-    public function edit($type, $id)
+    public function edit($id)
     {
-    	$user = User::findOrFail($id);
+        $user = User::where('id', $id)->firstOrFail();
     	
-    	if ($type == 'restaurateur') {
+    	if (Auth::user()->type == 0) {
     		return view('restaurateur.edit', compact('user'));
     	} else if ($type == 'influencer') {
     		return view('influencer.edit', compact('user'));
     	}
     }
 
-    public function update($type, $id, UserRequest $request) {
-    	// $this->validate(request(), [
-    	// 	'firstname' => 'required|max:255|string',
-    	// 	'lastname' => 'required|max:255|string',
-    	// 	// 'email' => 'required|max:255|string|unique:restaurateur',
-    	// 	'phone' => 'required|max:10|string'
-    	// ]);
-
-    	// https://laracasts.com/discuss/channels/laravel/update-user-account
-    	$user = User::find($id);
+    public function update($id, UserRequest $request) {
+    	$user = User::where('id', $id)->firstOrFail();
     	$user->firstname = $request->firstname;
     	$user->lastname = $request->lastname;
     	$user->phone = $request->phone;
     	$user->save();
 
-    	if ($type == 'restaurateur') {
+    	if (Auth::user()->type == 'restaurateur') {
     		return view('restaurateur.show', compact('user'));
     	} else if ($type == 'influencer') {
     		return view('influencer.show', compact('user'));
     	}
+    }
+
+    public function messages()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->type == 0)
+            {
+                return view('restaurateur.message');
+            } else {
+                return view('influencer.message');
+            }
+        }
+
+        return redirect('/');
+    }
+
+    public function reservations()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->type == 0)
+            {
+                return view('restaurateur.reservation');
+            } else {
+                return view('influencer.reservation');
+            }
+        } 
+        return redirect('/');
+        
     }
 }

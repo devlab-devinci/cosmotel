@@ -35,7 +35,7 @@
                 </div>
                 @if(Auth::check() && Auth::user()->id == $user->id)
                 <div class="card-body">
-                    <a href="{{ route('user.edit', ['id' => $user->id, 'type' => $user->typeLabel]) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('restaurateur.edit', ['id' => $user->id]) }}" class="btn btn-primary">Edit</a>
                 </div>
                 @endif
             </div>

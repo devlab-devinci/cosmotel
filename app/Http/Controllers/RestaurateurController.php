@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class RestaurateurController extends Controller
 {
@@ -15,4 +16,5 @@ class RestaurateurController extends Controller
     {
     	return view('restaurateur.index');
     }
+
 }

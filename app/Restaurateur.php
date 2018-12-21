@@ -22,4 +22,19 @@ class Restaurateur extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function getFirstnameAttribute()
+    {
+        return $this->user->firstname;
+    }
+
+    public function getLastnameAttribute()
+    {
+        return $this->user->lastname;
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
 }

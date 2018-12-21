@@ -1,4 +1,4 @@
-@extends('restaurateur.layouts.app')
+@extends('influencer.layouts.app')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Edition de votre profil</div>
                 
-                <form method="POST" action="{{ route('user.update', ['id' => $user->id, 'type' => $user->typeLabel]) }}">
+                <form method="POST" action="{{ route('influencer.update', ['id' => $user->id]) }}">
                     @csrf
                     
                     @include('forms.edit_form')
