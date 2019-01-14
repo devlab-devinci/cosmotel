@@ -13,6 +13,28 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function myAccount()
+    {
+        $user = Auth::user();
+
+        return view('common.account', compact('user'));
+    }
+
+    public function myAccountUpdate(UserRequest $request) {
+        // dd($request);
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->phone = $request->phone;
+        if (!empty($request->password))
+        {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        return view('common.account', compact('user'));
+    }
+
     public function show($id)
     {	
     	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'

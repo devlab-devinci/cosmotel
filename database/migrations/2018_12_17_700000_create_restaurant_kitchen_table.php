@@ -17,13 +17,14 @@ class CreateRestaurantKitchenTable extends Migration
             $table->increments('id');
             $table->integer('restaurant_id')->unsigned();
             $table->integer('kitchen_id')->unsigned();
+            $table->timestamps();
+
             $table->foreign('restaurant_id')->references('id')->on('restaurants')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->foreign('kitchen_id')->references('id')->on('kitchens')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->timestamps();
         });
     }
 

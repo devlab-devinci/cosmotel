@@ -15,15 +15,16 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('discount_percentage');
-            $table->integer('minimum_subscribers');
-            $table->integer('minimum_stories');
-            $table->integer('minimum_posts');
             $table->integer('restaurant_id')->unsigned();
+            $table->string('discount')->comment = "Percentage";
+            $table->integer('subscribers')->comment = "Minimum need of subscribers to have the discount";
+            $table->integer('stories')->comment = "Minimum need of stories to have the discount";;
+            $table->integer('posts')->comment = "Minimum need of posts to have the discount";;
+            $table->timestamps();
+
             $table->foreign('restaurant_id')->references('id')->on('restaurants')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->timestamps();
         });
     }
 

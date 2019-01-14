@@ -9,7 +9,7 @@ $factory->define(App\ProductCategory::class, function (Faker $faker) {
     $number++;
 
     return [
-        'title' => $categories[$number],
+        'label' => $categories[$number],
         'slug' => $categoriesSlug[$number]
     ];
 });

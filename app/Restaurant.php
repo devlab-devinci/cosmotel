@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     protected $fillable = [
-        'restaurateur_id', 'address', 'description', 'latitude', 'logitude'
+        'restaurateur_id', 'name', 'address', 'description', 'latitude', 'longitude'
     ];
 
     /**
@@ -33,7 +33,7 @@ class Restaurant extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Product', 'restaurant_id');
     }
 
     /**
@@ -41,6 +41,14 @@ class Restaurant extends Model
      */
     public function restaurateur()
     {
-        return $this->belongsTo('App\Restaurateur');
+        return $this->belongsTo('App\Restaurateur', 'restaurateur_id');
+    }
+
+    /**
+     * Get the list of discounts provided by the restaurant
+     */
+    public function discounts()
+    {
+        return $this->hasMany('App\Discount', 'restaurant_id');
     }
 }
