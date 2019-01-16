@@ -35,8 +35,8 @@ class UserController extends Controller
         return view('common.account', compact('user'));
     }
 
-    public function show($id)
-    {	
+    /*public function show($id)
+    {
     	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'
     	$user = User::where('id', $id)->firstOrFail();
 
@@ -50,7 +50,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->firstOrFail();
-    	
+
     	if (Auth::user()->type == 0) {
     		return view('restaurateur.edit', compact('user'));
     	} else if ($type == 'influencer') {
@@ -70,7 +70,7 @@ class UserController extends Controller
     	} else if ($type == 'influencer') {
     		return view('influencer.show', compact('user'));
     	}
-    }
+    }*/
 
     public function messages()
     {

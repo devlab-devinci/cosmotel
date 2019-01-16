@@ -90,43 +90,20 @@ Route::group(
 		]);
 });
 
-// Route::get('/restaurateur', [
-// 	'as' => 'restaurateur',
-// 	'uses' => 'RestaurateurController@index'
-// ]);
-
-// Route::get('/influencer', [
-// 	'as' => 'influencer',
-// 	'uses' => 'InfluencerController@index'
-// ]);
-
-// //////// RESTAURATEUR
-// // Route::get('/restaurateur/{id}', [
-// // 	'as' => 'restaurateur.show',
-// // 	'uses' => 'UserController@show'
-// // ]);
-
-
-// Route::group(
-//     [
-//         'prefix'     => 'restaurateur',
-//         'as'         => 'restaurateur.',
-//     ], function () {
-//     	Route::get('/{id}', [
-// 			'as' => 'show',
-// 			'uses' => 'UserController@show'
-// 		]);
-
-// 		Route::get('/{id}/edit', [
-// 			'as' => 'edit',
-// 			'uses' => 'UserController@edit'
-// 		]);
-
-// 		Route::put('/{id}', [
-// 			'as' => 'update',
-// 			'uses' => 'UserController@update'
-// 		]);
-// });
+Route::group(
+    [
+        'prefix' => 'restaurant',
+        'as' => 'restaurant::',
+    ], function() {
+        /*Route::post('/getOne', [
+            'as' => 'getOne',
+            'uses' => 'RestaurantController@getOne'
+        ]);*/
+        Route::get('/getOne/{id}', [
+            'as' => 'getOne',
+            'uses' => 'RestaurantController@getOne'
+        ]);
+});
 
 
 

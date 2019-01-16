@@ -26,7 +26,7 @@
 				  	@if (Auth::user()->influencer)
 				    	<li class="nav-item"><a class="nav-link" href="{{ route('influencer::search') }}">Recherche</a></li>
 				  	@elseif (Auth::user()->restaurateur)
-				    	<li class="nav-item"><a class="nav-link" href="{#">Annonce</a></li>
+				    	<li class="nav-item"><a class="nav-link" href="#">Annonce</a></li>
 				  	@endif
 				  	<li class="nav-item"><a class="nav-link" href="#">Mes réservations</a></li>
 				  	<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
