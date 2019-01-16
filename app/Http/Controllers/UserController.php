@@ -13,8 +13,30 @@ use Auth;
 
 class UserController extends Controller
 {
-    public function show($id)
-    {	
+    public function myAccount()
+    {
+        $user = Auth::user();
+
+        return view('common.account', compact('user'));
+    }
+
+    public function myAccountUpdate(UserRequest $request) {
+        // dd($request);
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->phone = $request->phone;
+        if (!empty($request->password))
+        {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        return view('common.account', compact('user'));
+    }
+
+    /*public function show($id)
+    {
     	// $typeInt = $type == 'restaurateur' ? 'restaurateur' : 'influencer'
     	$user = User::where('id', $id)->firstOrFail();
 
@@ -28,7 +50,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->firstOrFail();
-    	
+
     	if (Auth::user()->type == 0) {
     		return view('restaurateur.edit', compact('user'));
     	} else if ($type == 'influencer') {
@@ -48,7 +70,7 @@ class UserController extends Controller
     	} else if ($type == 'influencer') {
     		return view('influencer.show', compact('user'));
     	}
-    }
+    }*/
 
     public function messages()
     {

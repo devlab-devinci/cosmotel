@@ -23,6 +23,14 @@ class Restaurateur extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    /**
+     * Get restaurants list for the restaurateur.
+     */
+    public function restaurant()
+    {
+        return $this->hasOne('App\Restaurant');
+    }
+
     public function getFirstnameAttribute()
     {
         return $this->user->firstname;
@@ -36,13 +44,5 @@ class Restaurateur extends Model
     public function getFullnameAttribute()
     {
         return $this->firstname.' '.$this->lastname;
-    }
-
-    /**
-     * Get restaurants list for the restaurateur.
-     */
-    public function restaurant()
-    {
-        return $this->hasOne('App\Restaurant');
     }
 }

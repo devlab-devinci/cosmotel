@@ -15,7 +15,8 @@ class CreateKitchensTable extends Migration
     {
         Schema::create('kitchens', function (Blueprint $table) {
             $table->increments('id')->unsigned();;
-            $table->string('title');
+            $table->string('label');
+            $table->string('slug');
             $table->timestamps();
         });
     }

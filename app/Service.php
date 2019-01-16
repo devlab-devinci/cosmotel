@@ -7,10 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     /**
-     * Get restaurants that provide the service.
+     * The attributes that are mass assignable.
+     *
+     * @var array
      */
-    public function restaurant()
+    protected $fillable = [
+        'label', 'slug'
+    ];
+
+    /**
+     * Get restaurants list that provide the kitchen type.
+     */
+    public function restaurants()
     {
-        return $this->belongsToMany('App\Restaurant');
+        return $this->belongsToMany('App\Restaurant', 'restaurant_service', 'service_id', 'restaurant_id');
     }
 }
