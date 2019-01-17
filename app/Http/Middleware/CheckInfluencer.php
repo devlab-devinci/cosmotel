@@ -17,9 +17,9 @@ class CheckInfluencer
     public function handle($request, Closure $next)
     {
             if (Auth::check() && Auth::user()->type == 0) {
-                return redirect()->route('restaurateur');
+                return route('restaurateur');
             } else if (!Auth::check()) {
-                return redirect()->route('guest::home');
+                return route('guest::home');
             }
         
         return $next($request);
