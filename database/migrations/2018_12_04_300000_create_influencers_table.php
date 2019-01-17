@@ -16,8 +16,12 @@ class CreateInfluencersTable extends Migration
         Schema::create('influencers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->string('username');
+            $table->integer('followers');
+            $table->integer('media_count');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
