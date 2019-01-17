@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'restaurateur' => \App\Http\Middleware\CheckRestaurateur::class,
         'influencer' => \App\Http\Middleware\CheckInfluencer::class,
+        'instagram' => \App\Http\Middleware\InstagramAPIMiddleware::class,
     ];
 
     /**

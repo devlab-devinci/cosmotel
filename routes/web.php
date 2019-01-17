@@ -87,7 +87,7 @@ Route::group(
     	Route::get('/search', [
 			'as' => 'search',
 			'uses' => 'InfluencerController@search'
-		]);
+		])->middleware('influencer', 'instagram');
 });
 
 Route::group(
@@ -104,6 +104,11 @@ Route::group(
             'uses' => 'RestaurantController@getOne'
         ]);
 });
+
+Route::get('/instagram', 'InstagramController@redirectToInstagramProvider')->middleware('influencer', 'instagram');
+
+Route::get('/instagram/callback', 'InstagramController@handleProviderInstagramCallback')->middleware('influencer', 'instagram');
+
 
 
 

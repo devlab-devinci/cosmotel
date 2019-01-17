@@ -45,6 +45,16 @@
   </div>
 </div>
 <div class="container">
+  @if(Auth::user()->influencer->access_token)
+    {{ $user->username }}
+    Posts({{$user->counts->media}}) .
+    Followers({{$user->counts->followed_by}}) .
+    Following({{$user->counts->follows}})
+  @else
+    <a href="/instagram" class="btn btn-default">
+      Authenticate with Instagram
+    </a>
+  @endif
   <form>
     <div class="form-row">
       <div class="form-group col-md-6">

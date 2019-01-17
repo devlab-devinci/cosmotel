@@ -164,6 +164,7 @@ return [
          * Package Service Providers...
          */
         SocialiteProviders\Manager\ServiceProvider::class,
+        App\Providers\InstagramServiceProvider::class,
         /*
          * Application Service Providers...
          */
