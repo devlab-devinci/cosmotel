@@ -7,10 +7,10 @@ use App\User;
 
 class RestaurateurController extends Controller
 {
-	public function __construct()
+	/*public function __construct()
     {
         $this->middleware('restaurateur');
-    }
+    }*/
 
     public function index()
     {
