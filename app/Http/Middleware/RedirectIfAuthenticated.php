@@ -20,10 +20,10 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             if (Auth::user()->type == 1)
             {
-                return route('influencer::search');
+                return redirect()->route('influencer::search');
             } else if (Auth::user()->type == 0)
             {
-                return route('restaurateur');
+                return redirect()->route('restaurateur');
             }
         }
 
