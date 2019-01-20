@@ -18,7 +18,13 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            if (Auth::user()->type == 1)
+            {
+                return route('influencer::search');
+            } else if (Auth::user()->type == 0)
+            {
+                return route('restaurateur');
+            }
         }
 
         return $next($request);

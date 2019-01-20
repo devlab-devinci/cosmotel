@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -36,4 +39,36 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function showLoginForm($type) {
+        if ($type == 'restaurateur') {
+            return view('auth.restaurateur.login');
+        } else if ($type == 'influencer') {
+            return view('auth.influencer.login');
+        }
+    }
+
+    public function redirectTo()
+    {
+        if (Auth::user()->type == 0) {
+            return '/restaurateur';
+        } else if (Auth::user()->type == 1) {
+            return route('influencer::search');
+        }
+    }
+
+    // public function authenticate(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+            
+    //         if (Auth::user()->type == 0) {
+    //             return redirect()->intended('restaurateur');
+    //         } else if (Auth::user()->type == 1) {
+    //             return redirect()->intended('influencer');
+    //         }
+    //         // return redirect()->intended('dashboard');
+    //     }
+    // }
 }

@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Restaurateur;
+use App\Influencer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Instagram\Storage\CacheManager;
+use Instagram\Api;
 
 class RegisterController extends Controller
 {
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -40,6 +45,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function redirectTo()
+    {
+        if (Auth::user()->type == 0) {
+            return '/restaurateur';
+        } else if (Auth::user()->type == 1) {
+            return route('influencer::search');;
+        }
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,10 +63,21 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:10', 'min:10'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'username' => ['string', $data['type'] == 1 ? 'required' : '',]
         ]);
+    }
+
+    public function showRegisterForm($type) {
+        if ($type == 'restaurateur') {
+            return view('auth.restaurateur.register');
+        } else if ($type == 'influencer') {
+            return view('auth.influencer.register');
+        }
     }
 
     /**
@@ -63,10 +88,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+
+        $type = $data['type'];
+
+        $user = User::create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'type' => $type,
             'password' => Hash::make($data['password']),
         ]);
+
+        if ($type == 0) {
+            Restaurateur::create([
+                'user_id' => $user->id
+            ]);
+        } else if ($type == 1) {
+            $cache = new CacheManager(__DIR__ . '/../../../../storage/framework/cache/data/instagram/');
+            $api   = new Api($cache);
+            $api->setUserName($data['username']);
+
+            $feed = $api->getFeed();
+
+            Influencer::create([
+                'user_id' => $user->id,
+                'username' => $data['username'],
+                'followers' => $feed->followers,
+                'media_count' => $feed->mediaCount
+            ]);
+        }
+
+        return $user;
     }
 }
