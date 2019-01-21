@@ -19,8 +19,8 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->text('description');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
             $table->timestamps();
 
             $table->foreign('restaurateur_id')->references('id')->on('restaurateurs')

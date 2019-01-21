@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Kitchen;
 
 class RestaurantController extends Controller
 {
@@ -29,9 +30,18 @@ class RestaurantController extends Controller
         return view('restaurant.index', ['restaurants' => $restaurants]);
     }
 
+    public function create()
+    {
+        $kitchens = Kitchen::all();
+        return view('restaurateur.restaurant.create', compact('kitchens'));
+    }
+
+
+    /////////////////////////////
+    // FUNCTIONS USE WITH AJAX //
+    /////////////////////////////
     public function getOne($id)
     {
-//        $restaurant = Restaurant::findOrFail($id);
         $restaurant = Restaurant::where('id', $id)
             ->with('restaurateur')
             ->with('kitchens')
@@ -41,8 +51,8 @@ class RestaurantController extends Controller
         $user = $restaurant->restaurateur->user;
 
         $data = [
-          'restaurant' => $restaurant,
-          'user' => $user
+            'restaurant' => $restaurant,
+            'user' => $user
         ];
         return $data;
     }

@@ -81,8 +81,8 @@ Route::group(
 
 Route::group(
     [
-        'prefix'     => 'influencer',
-        'as'         => 'influencer::',
+        'prefix'    => 'influencer',
+        'as'        => 'influencer::',
     ], function () {
     	Route::get('/search', [
 			'as' => 'search',
@@ -92,18 +92,28 @@ Route::group(
 
 Route::group(
     [
+        'prefix'    => 'restaurateur',
+        'as'        => 'restaurateur::'
+    ], function() {
+
+});
+
+Route::group(
+    [
         'prefix' => 'restaurant',
         'as' => 'restaurant::',
     ], function() {
-        /*Route::post('/getOne', [
-            'as' => 'getOne',
-            'uses' => 'RestaurantController@getOne'
-        ]);*/
         Route::get('/getOne/{id}', [
             'as' => 'getOne',
             'uses' => 'RestaurantController@getOne'
         ]);
+
+        Route::get('/create', [
+            'as'    => 'create',
+            'uses'  => 'RestaurantController@create'
+        ]);
 });
+
 
 
 
