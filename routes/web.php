@@ -95,7 +95,10 @@ Route::group(
         'prefix'    => 'restaurateur',
         'as'        => 'restaurateur::'
     ], function() {
-
+        Route::get('/', [
+            'as' => 'index',
+            'uses' => 'RestaurateurController@index'
+        ]);
 });
 
 Route::group(
@@ -108,10 +111,31 @@ Route::group(
             'uses' => 'RestaurantController@getOne'
         ]);
 
-        Route::get('/create', [
-            'as'    => 'create',
-            'uses'  => 'RestaurantController@create'
-        ]);
+        Route::group(
+            [
+                'prefix' => 'create',
+                'as' => 'create::'
+            ], function() {
+                Route::get('/', [
+                    'as'    => 'restaurant',
+                    'uses'  => 'RestaurantController@create'
+                ]);
+
+                Route::post('/', [
+                    'as'    => 'restaurantStore',
+                    'uses'  => 'RestaurantController@store'
+                ]);
+
+                Route::get('/{restaurant_id}/menu', [
+                    'as'    => 'product',
+                    'uses'  => 'ProductController@create'
+                ]);
+
+                Route::post('/{restaurant_id}/menu', [
+                    'as'    => 'productStore',
+                    'uses'  => 'ProductController@store'
+                ]);
+        });
 });
 
 

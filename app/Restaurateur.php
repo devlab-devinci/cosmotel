@@ -26,9 +26,9 @@ class Restaurateur extends Model
     /**
      * Get restaurants list for the restaurateur.
      */
-    public function restaurant()
+    public function restaurants()
     {
-        return $this->hasOne('App\Restaurant');
+        return $this->hasMany('App\Restaurant', 'restaurateur_id');
     }
 
     public function getFirstnameAttribute()

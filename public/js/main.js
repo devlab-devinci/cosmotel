@@ -20,6 +20,7 @@ $(document).ready( function() {
     }
 
     $restaurant.click( function() {
+        console.log('mdr');
         // var data = {'id': $(this).attr('data-id')};
         // console.log(data);
         /*$.ajax({

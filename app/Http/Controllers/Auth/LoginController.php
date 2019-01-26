@@ -51,7 +51,7 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (Auth::user()->type == 0) {
-            return '/restaurateur';
+            return route('restaurateur::index');
         } else if (Auth::user()->type == 1) {
             return route('influencer::search');
         }
