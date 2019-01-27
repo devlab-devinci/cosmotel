@@ -2,6 +2,10 @@ body * {
     font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 
+* {
+    transition: all 0.4s;
+}
+
 .underline:after {
     background-color: deeppink;
     bottom: 0;
@@ -95,3 +99,26 @@ body * {
 .GORReservation {
     padding: 20px 0;
 }
+
+.addProductLine {
+    padding: 10px;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.addProductLine:hover {
+    border-top: 1px solid deeppink;
+    border-bottom: 1px solid deeppink;
+}
+
+.productLine {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.productLine:not(:first-child) {
+    border-top: 1px solid lightgrey;
+}
+

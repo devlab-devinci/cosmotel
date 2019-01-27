@@ -23,7 +23,8 @@ class ProductController extends Controller
         $product->category_id = $request->category;
         $product->restaurant_id = $restaurant_id;
         $product->save();
-        return redirect('/restaurateur/');
+
+        return 'Tout est ok !';
     }
 
 /*    public function store(Request $request)

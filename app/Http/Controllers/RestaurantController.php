@@ -82,6 +82,7 @@ class RestaurantController extends Controller
             'restaurant' => $restaurant,
             'user' => $user
         ];
-        return $data;
+        return redirect('/');
+        // return $data;
     }
 }
