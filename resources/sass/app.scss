@@ -1,14 +1,27 @@
+/*
+ * Variables & mixins
+ */
+@import 'config/_mixins';
+@import 'config/_colors';
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+/*
+ * Global init
+ * You'll find all the variables and mixins in init.scss
+ */
 
-// Variables
-@import 'variables';
+/*
+ * Bootstrap Custom build
+ */
+@import 'bootstrap/bootstrap.scss';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'config/_fonts';
+@import 'config/_animations';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+@import 'layout/_helpers';
+//  @import 'layout/_buttons';
+
+@import 'layout/_main';
+
+ /*
+  * Plugins
+  */
