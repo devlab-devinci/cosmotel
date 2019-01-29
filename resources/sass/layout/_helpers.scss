@@ -1,0 +1,255 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+/*
+ * Card settings
+ */
+
+.cosmo-card{
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(72,69,121,0.16);
+  border-radius: 5px;
+  
+  @include tablet{
+    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+  @include mobile{
+    box-shadow: none;
+    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+}
+.spacer{
+  display: block;
+  width: 100%;
+  &.is-medium{
+    height: 200px;
+    @include mobile{
+        height: 80px;
+    }
+  }
+  &.is-small{
+    height: 100px;
+    @include mobile{
+        height: 40px;
+    }
+  }
+  &.is-smaller{
+    height: 60px;
+    @include mobile{
+        height: 30px;
+    }
+  }
+  &.is-smallest{
+    height: 30px;
+    @include mobile{
+        height: 15px;
+    }
+  }
+}
+
+// Container
+.container{
+  &.is-wide{
+    max-width: 1300px;
+  }
+}
+// border radius
+.br4{
+  border-radius: 4px;
+}
+.br5{
+  border-radius: 5px;
+}
+/*
+ * Margins utilities
+ */
+.m0auto{
+  margin: 0 auto;
+}
+.m0auto-tabdown{
+  @include tabdown{
+    margin: 0 auto;
+  }
+}
+.mlauto{
+  margin-left: auto;
+}
+.mrauto{
+  margin-right: auto;
+}
+.m30{
+
+  img{
+    margin: 15px 0;
+  }
+}
+.mt10{
+  margin-top: 10px;
+}
+.mt15{
+  margin-top: 15px;
+}
+.mt20{
+  margin-top: 20px;
+}
+.mt30{
+  margin-top: 30px;
+}
+.mt40{
+  margin-top: 40px;
+}
+.mt50{
+  margin-top: 50px;
+}
+.mt80{
+  margin-top: 80px;
+}
+.m0auto{
+  margin: 0 auto!important;
+}
+.m20auto{
+  margin: 20px auto!important;
+}
+.mb0{
+  margin-bottom: 0px!important;
+}
+.mb50{
+  margin-bottom: 50px!important;
+}
+.mb30{
+  margin-bottom: 30px!important;
+}
+.mb20{
+  margin-bottom: 20px!important;
+}
+.ml50{
+  margin-left: 50px;
+}
+
+// resp
+// tabdown
+.mt30-tabdown{
+  @include tabdown{
+    margin-top: 30px!important;
+  }
+}
+.mt50-deskup{
+  @include deskup{
+    margin-top: 50px!important;
+  }
+}
+.mt80-desktup{
+  @include deskup{
+    margin-top: 80px!important;
+  }
+}
+.mt50-tabdown{
+  @include tabdown{
+    margin-top: 50px!important;
+  }
+}
+.mb50-tabdown{
+  @include tabdown{
+    margin-bottom: 50px!important;
+  }
+}
+.mb50-deskup{
+  @include deskup{
+    margin-bottom: 50px!important;
+  }
+}
+// vertical margins
+.mv50{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+// Paddings
+.p0{
+  padding: 0!important;
+}
+.p0-deskup{
+  @include deskup{
+    padding: 0!important;
+  }
+}
+.p0-tabdown{
+  @include tabdown{
+    padding: 0!important;
+  }
+}
+.p10{
+  padding: 10px!important;
+}
+.p15{
+  padding: 15px!important;
+}
+.p15-tabdown{
+  @include tabdown{
+    padding: 15px!important;
+  }
+}
+.p20{
+  padding: 20px!important;
+}
+.p30{
+  padding: 30px!important;
+}
+.p40{
+  padding: 40px!important;
+}
+.p50{
+  padding: 50px!important;
+}
+.pb0{
+  padding-bottom: 0!important;
+}
+.pb10{
+  padding-bottom: 10px!important;
+}
+.pb20{
+  padding-bottom: 20px!important;
+}
+.pb30{
+  padding-bottom: 30px!important;
+}
+.pt0{
+  padding-top: 0!important;
+}
+.pl0{
+  padding-left: 0;
+}
+.pr0{
+  padding-right: 0;
+}
+.pl0-desk{
+  @include deskup{
+    padding-left: 0;
+  }
+}
+.pr0-desk{
+  @include deskup{
+    padding-right: 0;
+  }
+}
+.w80p{
+  width: 80%;
+}
+.w100p{
+  width: 100%;
+}
+/* Cursor */
+.typed-cursor{
+  color: $cosmoGreyHeavy!important;
+}
