@@ -46,8 +46,12 @@ Route::get('/login/{type}', [
 ]);
 
 Route::get('/myAccount', [
-	'as' => 'myAccount::show',
-	'uses' => 'UserController@myAccount'
+    'as' => 'myAccount::show',
+    'uses' => 'UserController@myAccount'
+
+Route::get('/restaurateur', [
+	'as' => 'restaurateur',
+	'uses' => 'RestaurateurController@index'
 ]);
 
 Route::put('/myAccount', [
@@ -70,13 +74,14 @@ Route::group(
 		]);
 
 		Route::get('/blog', [
-			'as' => 'blog',
-			'uses' => 'GuestController@blog'
-		]);
+		    'as' => 'blog',
+            'uses' => 'GuestController@blog'
+        ]);
+
 		Route::get('/contact', [
-			'as' => 'contact',
-			'uses' => 'GuestController@contact'
-		]);
+		    'as' => 'contact',
+            'uses' => 'GuestController@contact'
+        ]);
 });
 
 Route::group(
@@ -84,10 +89,24 @@ Route::group(
         'prefix'     => 'influencer',
         'as'         => 'influencer::',
     ], function () {
-    	Route::get('/search', [
-			'as' => 'search',
-			'uses' => 'InfluencerController@search'
-		]);
+    Route::get('/search', [
+        'as' => 'search',
+        'uses' => 'InfluencerController@search'
+    ]);
+    Route::get('/{id}', [
+        'as' => 'influencer.show',
+        'uses' => 'UserController@show'
+    ]);
+
+    Route::get('/{id}/edit', [
+        'as' => 'influencer.edit',
+        'uses' => 'UserController@edit'
+    ]);
+
+    Route::put('/{id}', [
+        'as' => 'influencer.update',
+        'uses' => 'UserController@update'
+    ]);
 });
 
 Route::group(
@@ -95,53 +114,49 @@ Route::group(
         'prefix' => 'restaurant',
         'as' => 'restaurant::',
     ], function() {
-        /*Route::post('/getOne', [
-            'as' => 'getOne',
-            'uses' => 'RestaurantController@getOne'
-        ]);*/
-        Route::get('/getOne/{id}', [
-            'as' => 'getOne',
-            'uses' => 'RestaurantController@getOne'
-        ]);
+    /*Route::post('/getOne', [
+        'as' => 'getOne',
+        'uses' => 'RestaurantController@getOne'
+    ]);*/
+    Route::get('/getOne/{id}', [
+        'as' => 'getOne',
+        'uses' => 'RestaurantController@getOne'
+    ]);
 });
 
+Route::group(
+    [
+        'prefix'     => 'restaurateur',
+        'as'         => 'restaurateur.',
+    ], function () {
+    	Route::get('/{id}', [
+			'as' => 'show',
+			'uses' => 'UserController@show'
+		]);
 
+		Route::get('/{id}/edit', [
+			'as' => 'edit',
+			'uses' => 'UserController@edit'
+		]);
 
+		Route::put('/{id}', [
+			'as' => 'update',
+			'uses' => 'UserController@update'
+		]);
+});
 
+/////
 
-// /////// INFLUENCER
-// Route::get('/influencer/{id}', [
-// 	'as' => 'influencer.show',
-// 	'uses' => 'UserController@show'
-// ]);
+Route::get('/restaurants', [
+	'as' => 'restaurants',
+	'uses' => 'RestaurantController@index'
+]);
 
-// Route::get('/influencer/{id}/edit', [
-// 	'as' => 'influencer.edit',
-// 	'uses' => 'UserController@edit'
-// ]);
+Route::get('/reservations', [
+	'as' => 'reservations',
+	'uses' => 'UserController@reservations'
+]);
 
-// Route::put('/influencer/{id}', [
-// 	'as' => 'influencer.update',
-// 	'uses' => 'UserController@update'
-// ]);
-
-
-// /////
-
-// Route::get('/restaurants', [
-// 	'as' => 'restaurants',
-// 	'uses' => 'RestaurantController@index'
-// ]);
-
-// Route::get('/messages', [
-// 	'as' => 'messages',
-// 	'uses' => 'UserController@messages'
-// ]);
-
-// Route::get('/reservations', [
-// 	'as' => 'reservations',
-// 	'uses' => 'UserController@reservations'
-// ]);
 
 
 
