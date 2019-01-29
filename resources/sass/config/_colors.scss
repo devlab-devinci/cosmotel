@@ -1,0 +1,46 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+// $font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+
+/*
+ * cosmo colors
+ */
+
+// Colors Reworked
+
+$cosmoGreyLite: #989898;
+$cosmoGreyLiter: #95989A;
+$cosmoGreyHeavy: #494949;
+
+$cosmoPurpleDeep: #484579;
+$cosmoPurpleDeeper: #2C2D6F;
+$cosmoPurpleDark:mix($cosmoPurpleDeep, #000, 70%);
+$cosmoPurpleLite:mix($cosmoPurpleDeep, #fff, 70%);
+
+$cosmoBlueLite: #E0E8FC;
+$cosmoBackground: #F8FAFF;
+$cosmoPlaceholder: rgba(72,69,121, .5);
+$cosmoInputFocus: #B1BFE0;
+
+
+// Google Color Palette
+$google-g: #3cba54;
+$google-y: #f4c20d;
+$google-r: #db3236;
+$google-b: #4885ed;
+
+// Brands
+$google: $google-b;
+$blue-algolia: #8994c6;
+$linkedin: #0077b5;
+$facebook: #3b5998;
+$messenger: #0084ff;
+$twitter: #4099FF;
+$whatsapp: #25d366;
+
+// legacy
