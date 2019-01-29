@@ -48,6 +48,7 @@ Route::get('/login/{type}', [
 Route::get('/myAccount', [
     'as' => 'myAccount::show',
     'uses' => 'UserController@myAccount'
+]);
 
 Route::get('/restaurateur', [
 	'as' => 'restaurateur',
@@ -128,7 +129,13 @@ Route::group(
     [
         'prefix'     => 'restaurateur',
         'as'         => 'restaurateur.',
+        'middleware' => 'is.restaurateur',
     ], function () {
+        Route::get('/dashboard', [
+            'as' => 'show',
+            'uses' => 'RestaurateurController@dashboard'
+        ]);
+
     	Route::get('/{id}', [
 			'as' => 'show',
 			'uses' => 'UserController@show'
@@ -143,9 +150,18 @@ Route::group(
 			'as' => 'update',
 			'uses' => 'UserController@update'
 		]);
+
+		Route::get('restaurant/create', [
+            'as' => 'restaurant::create',
+            'uses' => 'RestaurantController@create'
+        ]);
+
+        Route::post('restaurant/create', [
+            'as' => 'restaurant::store',
+            'uses' => 'RestaurantController@store'
+        ]);
 });
 
-/////
 
 Route::get('/restaurants', [
 	'as' => 'restaurants',

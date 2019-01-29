@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Opening::class, function (Faker $faker) {
-    static $increment = 0;
+    static $increment = 1;
     static $day = -1;
 
     $day++;
@@ -23,8 +23,8 @@ $factory->define(App\Opening::class, function (Faker $faker) {
         'open_lunch' => $faker->boolean,
         'open_time_lunch' => $faker->time(),
         'close_time_lunch' => $faker->time(),
-        'open_diner' => $faker->boolean,
-        'open_time_diner' => $faker->time(),
-        'close_time_diner' => $faker->time(),
+        'open_dinner' => $faker->boolean,
+        'open_time_dinner' => $faker->time(),
+        'close_time_dinner' => $faker->time(),
     ];
 });

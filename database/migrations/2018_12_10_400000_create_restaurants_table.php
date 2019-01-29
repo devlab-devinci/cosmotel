@@ -35,7 +35,7 @@ fin soir: heure
             $table->string('name');
             $table->string('address');
             $table->text('description');
-            $table->time('reservation_interval');
+            $table->integer('service_interval')->nullable();
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->timestamps();

@@ -21,7 +21,7 @@ class RestaurantController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('restaurateur');
+        //
     }
 
     /**
@@ -60,7 +60,7 @@ class RestaurantController extends Controller
     {
         $restaurateur = Auth::user()->restaurateur;
         $restaurant = new Restaurant;
-        $restaurant->title = $request->name;
+        $restaurant->name = $request->name;
         $restaurant->address = $request->address;
         $restaurant->description = $request->description;
         $restaurant->latitude = $request->latitude;
@@ -69,6 +69,7 @@ class RestaurantController extends Controller
         $restaurant->save();
 
         $services = $request->services;
+
         foreach ($services as $service)
         {
             $restaurant_service = new RestaurantService;
@@ -150,5 +151,11 @@ class RestaurantController extends Controller
           'user' => $user
         ];
         return $data;
+    }
+
+    public function reservations($id){
+        $restaurant = Restaurant::find($id);
+
+        return $restaurant->reservation;
     }
 }

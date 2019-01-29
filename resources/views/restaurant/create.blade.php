@@ -1,4 +1,4 @@
-@extends('restaurant.layouts.app')
+@extends('guest.layouts.home')
 
 @section('content')
     <div class="container">
@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header mb-3">Register a new restaurant</div>
 
-                    <form method="POST" action="{{ route('restaurant.index') }}">
+                    <form method="POST" action="{{ route('restaurateur.restaurant::store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                                 @foreach ($services as $service)
                                     <input type="checkbox" name="services" value="{{ $service->id }}" class="{{ $errors->has('service') ? ' is-invalid' : '' }}">
-                                    {{ $service->title }}
+                                    {{ $service->label }}
                                 @endforeach
 
                                 @if ($errors->has('services'))
@@ -103,7 +103,7 @@
                             <div class="col-md-6">
                                 @foreach ($kitchens as $kitchen)
                                     <input type="checkbox" name="kitchens" value="{{ $kitchen->id }}" class="{{ $errors->has('kitchen') ? ' is-invalid' : '' }}">
-                                    {{ $kitchen->title }}
+                                    {{ $kitchen->label }}
                                 @endforeach
 
                                 @if ($errors->has('kitchen'))

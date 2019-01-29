@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOpeningTable extends Migration
+class CreateOpeningsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,14 +21,14 @@ class CreateOpeningTable extends Migration
                 ->onUpdate('restrict');
             $table->integer('day');
             $table->boolean('open_morning');
-            $table->time('open_time_morning');
-            $table->time('close_time_morning');
+            $table->time('open_time_morning')->nullable();
+            $table->time('close_time_morning')->nullable();
             $table->boolean('open_lunch');
-            $table->time('open_time_lunch');
-            $table->time('close_time_lunch');
+            $table->time('open_time_lunch')->nullable();
+            $table->time('close_time_lunch')->nullable();
             $table->boolean('open_dinner');
-            $table->time('open_time_dinner');
-            $table->time('close_time_dinner');
+            $table->time('open_time_dinner')->nullable();
+            $table->time('close_time_dinner')->nullable();
             $table->timestamps();
         });
     }
@@ -40,6 +40,6 @@ class CreateOpeningTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('opening');
+        Schema::dropIfExists('openings');
     }
 }
