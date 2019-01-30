@@ -51,4 +51,12 @@ class Restaurant extends Model
     {
         return $this->hasMany('App\Discount', 'restaurant_id');
     }
+
+    /**
+     * Get the list of discounts provided by the restaurant
+     */
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation', 'restaurant_id');
+    }
 }

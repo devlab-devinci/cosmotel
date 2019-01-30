@@ -26,7 +26,9 @@ class RestaurateurController extends Controller
         $reservations = [];
 
         foreach ($restaurants as $restaurant) {
-            $reservations[] = $restaurant->reservations;
+            foreach ($restaurant->reservations as $reservation) {
+                $reservations[] = $reservation;
+            }
         }
 
         return view('restaurateur.dashboard', ['restaurants' => $restaurants, 'reservations' => $reservations]);

@@ -11,6 +11,7 @@ use App\RestaurantService;
 use App\RestaurantKitchen;
 use App\Discount;
 use Auth;
+use App\ProductCategory;
 
 class RestaurantController extends Controller
 {
@@ -86,6 +87,10 @@ class RestaurantController extends Controller
             $restaurant_kitchen->kitchen_id = $kitchen;
             $restaurant_kitchen->save();
         }
+
+        $product_categories = ProductCategory::all();
+
+        return view('products.create', ['restaurant_id' => $restaurant->id, 'product_categories' => $product_categories]);
     }
 
     /**

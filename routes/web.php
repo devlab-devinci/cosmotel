@@ -160,6 +160,16 @@ Route::group(
             'as' => 'restaurant::store',
             'uses' => 'RestaurantController@store'
         ]);
+
+        Route::post('restaurant/addProducts', [
+        'as' => 'product::store',
+        'uses' => 'ProductController@store'
+        ]);
+
+        Route::post('restaurant/addOpenings', [
+            'as' => 'opening::store',
+            'uses' => 'OpeningController@store'
+        ]);
 });
 
 

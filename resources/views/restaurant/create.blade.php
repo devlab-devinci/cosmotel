@@ -85,7 +85,7 @@
 
                             <div class="col-md-6">
                                 @foreach ($services as $service)
-                                    <input type="checkbox" name="services" value="{{ $service->id }}" class="{{ $errors->has('service') ? ' is-invalid' : '' }}">
+                                    <input type="checkbox" name="services[]" value="{{ $service->id }}" class="{{ $errors->has('service') ? ' is-invalid' : '' }}">
                                     {{ $service->label }}
                                 @endforeach
 
@@ -102,7 +102,7 @@
 
                             <div class="col-md-6">
                                 @foreach ($kitchens as $kitchen)
-                                    <input type="checkbox" name="kitchens" value="{{ $kitchen->id }}" class="{{ $errors->has('kitchen') ? ' is-invalid' : '' }}">
+                                    <input type="checkbox" name="kitchens[]" value="{{ $kitchen->id }}" class="{{ $errors->has('kitchen') ? ' is-invalid' : '' }}">
                                     {{ $kitchen->label }}
                                 @endforeach
 
