@@ -132,7 +132,7 @@ Route::group(
         'middleware' => 'is.restaurateur',
     ], function () {
         Route::get('/dashboard', [
-            'as' => 'show',
+            'as' => 'dashboard',
             'uses' => 'RestaurateurController@dashboard'
         ]);
 
@@ -169,6 +169,11 @@ Route::group(
         Route::post('restaurant/addOpenings', [
             'as' => 'opening::store',
             'uses' => 'OpeningController@store'
+        ]);
+
+        Route::post('restaurant/addDiscount', [
+            'as' => 'discount::store',
+            'uses' => 'DiscountController@store'
         ]);
 });
 

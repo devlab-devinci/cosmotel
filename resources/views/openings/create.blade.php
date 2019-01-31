@@ -6,12 +6,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header mb-3">Register a part of your menu</div>
-                    <form method="POST" action="{{ route('restaurateur.product::store') }}">
+                    <form method="POST" action="{{ route('restaurateur.opening::store') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">
 
                         @foreach($days as $day)
+
                             <div class="form-group row">
                                 <div class="col-12">
                                     <h2>{{ $day }}</h2>
@@ -22,7 +23,7 @@
                                     <label for="{{ $day }}_{{ $time }}" class="col-md-3 col-form-label text-md-right">Open on {{ $day }} - {{ $time }}</label>
 
                                     <div class="col-md-1">
-                                        <input id="{{ $day }}_{{ $time }}" type="checkbox" class="form-control{{ $errors->has($day . '_' . $time) ? ' is-invalid' : '' }}" name="open_{{ $time }}[]" autofocus>
+                                        <input id="{{ $day }}_{{ $time }}" type="checkbox" class="form-control{{ $errors->has($day . '_' . $time) ? ' is-invalid' : '' }}" name="data[{{ $loop->parent->index }}][open_{{ $time }}]" autofocus>
 
                                         @if ($errors->has($day . '_' . $time))
                                             <span class="invalid-feedback" role="alert">
@@ -34,7 +35,7 @@
                                     <label for="{{ $day }}_{{ $time }}-open" class="col-md-2 col-form-label text-md-right">Open time</label>
 
                                     <div class="col-md-2">
-                                        <input id="{{ $day }}_{{ $time }}-open" type="number" class="form-control{{ $errors->has($day . '_' . $time . '-open') ? ' is-invalid' : '' }}" name="open_time_{{ $time }}[]" autofocus>
+                                        <input id="{{ $day }}_{{ $time }}-open" type="number" class="form-control{{ $errors->has($day . '_' . $time . '-open') ? ' is-invalid' : '' }}" name="data[{{ $loop->parent->index }}][open_time_{{ $time }}]" autofocus>
 
                                         @if ($errors->has($day . '_' . $time . '-open'))
                                             <span class="invalid-feedback" role="alert">
@@ -46,7 +47,7 @@
                                     <label for="{{ $day }}_{{ $time }}-close" class="col-md-2 col-form-label text-md-right">Close time</label>
 
                                     <div class="col-md-2">
-                                        <input id="{{ $day }}_{{ $time }}-close" type="number" class="form-control{{ $errors->has($day . '_' . $time . '-close') ? ' is-invalid' : '' }}" name="close_time_{{ $time }}[]" autofocus>
+                                        <input id="{{ $day }}_{{ $time }}-close" type="number" class="form-control{{ $errors->has($day . '_' . $time . '-close') ? ' is-invalid' : '' }}" name="data[{{ $loop->parent->index }}][close_time_{{ $time }}]" autofocus>
 
                                         @if ($errors->has($day . '_' . $time . '-close'))
                                             <span class="invalid-feedback" role="alert">
