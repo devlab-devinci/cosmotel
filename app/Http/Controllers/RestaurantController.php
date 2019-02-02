@@ -67,26 +67,14 @@ class RestaurantController extends Controller
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
         $restaurant->restaurateur_id = $restaurateur->id;
+        $restaurant->status = 'draft';
         $restaurant->save();
 
-        $services = $request->services;
+        $services = Service::find($request->services);
+        $restaurant->services()->sync($services);
 
-        foreach ($services as $service)
-        {
-            $restaurant_service = new RestaurantService;
-            $restaurant_service->restaurant_id = $restaurant->id;
-            $restaurant_service->service_id = $service;
-            $restaurant_service->save();
-        }
-
-        $kitchens = $request->kitchens;
-        foreach ($kitchens as $kitchen)
-        {
-            $restaurant_kitchen = new RestaurantKitchen;
-            $restaurant_kitchen->restaurant_id = $restaurant->id;
-            $restaurant_kitchen->kitchen_id = $kitchen;
-            $restaurant_kitchen->save();
-        }
+        $kitchens = Service::find($request->kitchens);
+        $restaurant->kitchens()->sync($kitchens);
 
         $product_categories = ProductCategory::all();
 
@@ -114,7 +102,11 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $restaurant = Restaurant::find($id);
+        $kitchens = Kitchen::all();
+        $services = Service::all();
+
+        return view('restaurant.edit', ['kitchens' => $kitchens, "services" => $services, "current_restaurant" => $restaurant]);
     }
 
     /**
@@ -126,7 +118,21 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $restaurant = Restaurant::find($id);
+        $restaurant->name = $request->name;
+        $restaurant->address = $request->address;
+        $restaurant->description = $request->description;
+        $restaurant->latitude = $request->latitude;
+        $restaurant->longitude = $request->longitude;
+        $restaurant->update();
+
+        $services = Service::find($request->services);
+        $restaurant->services()->sync($services);
+
+        $kitchens = Service::find($request->kitchens);
+        $restaurant->kitchens()->sync($kitchens);
+
+        return view('restaurant.show', ['restaurant' => $restaurant]);
     }
 
     /**
@@ -142,7 +148,7 @@ class RestaurantController extends Controller
 
     public function getOne($id)
     {
-//        $restaurant = Restaurant::findOrFail($id);
+        //$restaurant = Restaurant::findOrFail($id);
         $restaurant = Restaurant::where('id', $id)
             ->with('restaurateur')
             ->with('kitchens')

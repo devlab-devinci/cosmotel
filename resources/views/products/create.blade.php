@@ -11,42 +11,58 @@
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">
 
-                        @foreach($product_categories as $category)
-
-                            <div class="form-group row">
-                                <label for="{{ $category->slug }}" class="col-md-2 col-form-label text-md-right">{{ $category->label }}</label>
-
-                                <div class="col-md-5">
-                                    <input id="{{ $category->slug }}" type="text" class="form-control{{ $errors->has($category->slug) ? ' is-invalid' : '' }}" name="products[]" required autofocus>
-
-                                    @if ($errors->has($category->slug))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first($category->slug) }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-
-                                <input type="hidden" name="product_category[]" value="{{ $category->id }}">
-
-                                <label for="{{ $category->slug }}-price" class="col-md-2 col-form-label text-md-right">Price</label>
-
-                                <div class="col-md-2">
-                                    <input id="{{ $category->slug }}-price" type="number" class="form-control{{ $errors->has($category->slug . '-price') ? ' is-invalid' : '' }}" name="prices[]" required autofocus>
-
-                                    @if ($errors->has($category->slug . '-price'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first($category->slug . '-price') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-
+                        <div class="form-group row">
+                            <div class="row">
+                                <label class="col-md-12 col-form-label text-md-right">Products</label>
                             </div>
-                        @endforeach
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label for="label" class="col-md-12 col-form-label text-md-right">Name</label>
+                                </div>
+                                <input id="label" type="text" class="form-control{{ $errors->has('label') ? ' is-invalid' : '' }}" name="products[1][label]" required autofocus>
+
+                                @if ($errors->has('label'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('label') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <label for="price" class="col-md-12 col-form-label text-md-right">Price</label>
+                                </div>
+                                <input id="price" type="text" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="products[1][price]" required autofocus>
+
+                                @if ($errors->has('price'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('price') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <label for="category" class="col-md-12 col-form-label text-md-right">Type of product</label>
+                                </div>
+                                <select id="category" type="text" class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="products[1][category_id]" required autofocus>
+                                    @foreach($product_categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->label }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('category'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('category') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Add products
                                 </button>
                             </div>
                         </div>

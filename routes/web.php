@@ -151,6 +151,11 @@ Route::group(
 			'uses' => 'UserController@update'
 		]);
 
+        Route::get('restaurant/single/{id}', [
+            'as' => 'restaurant::show',
+            'uses' => 'RestaurantController@show'
+        ]);
+
 		Route::get('restaurant/create', [
             'as' => 'restaurant::create',
             'uses' => 'RestaurantController@create'
@@ -161,9 +166,29 @@ Route::group(
             'uses' => 'RestaurantController@store'
         ]);
 
+        Route::get('restaurant/edit/{id}', [
+            'as' => 'restaurant::edit',
+            'uses' => 'RestaurantController@edit'
+        ]);
+
+        Route::post('restaurant/edit/{id}', [
+            'as' => 'restaurant::update',
+            'uses' => 'RestaurantController@update'
+        ]);
+
         Route::post('restaurant/addProducts', [
         'as' => 'product::store',
         'uses' => 'ProductController@store'
+        ]);
+
+        Route::get('restaurant/editProducts/{id}', [
+            'as' => 'product::edit',
+            'uses' => 'ProductController@edit'
+        ]);
+
+        Route::post('restaurant/editProducts/', [
+            'as' => 'product::update',
+            'uses' => 'ProductController@update'
         ]);
 
         Route::post('restaurant/addOpenings', [
@@ -171,9 +196,29 @@ Route::group(
             'uses' => 'OpeningController@store'
         ]);
 
+        Route::get('restaurant/editOpenings/{id}', [
+            'as' => 'opening::edit',
+            'uses' => 'OpeningController@edit'
+        ]);
+
+        Route::post('restaurant/editOpenings', [
+            'as' => 'opening::update',
+            'uses' => 'OpeningController@update'
+        ]);
+
         Route::post('restaurant/addDiscount', [
             'as' => 'discount::store',
             'uses' => 'DiscountController@store'
+        ]);
+
+        Route::get('restaurant/editDiscount/{id}', [
+            'as' => 'discount::edit',
+            'uses' => 'DiscountController@edit'
+        ]);
+
+        Route::post('restaurant/editDiscount', [
+            'as' => 'discount::update',
+            'uses' => 'DiscountController@update'
         ]);
 });
 

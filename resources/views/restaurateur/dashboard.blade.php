@@ -61,19 +61,21 @@
             @foreach($restaurants as $restaurant)
                 <div class="col-12 col-sm-6 col-md-4 mb-3">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">{{ $restaurant->name }}</div>
-                            <div class="card-subtitle mb-2 text-muted">{{ $restaurant->address }}</div>
-                            {{ $restaurant->description }}
-                            <footer class="blockquote-footer">
-                                @foreach($restaurant->services as $service)
-                                    {{ $service->label }}
-                                @endforeach
-                                @foreach($restaurant->kitchens as $kitchen)
-                                    {{ $kitchen->label }}
-                                @endforeach
-                            </footer>
-                        </div>
+                        <a href="{{ route('restaurateur.restaurant::show', $restaurant->id) }}">
+                            <div class="card-body">
+                                <div class="card-title">{{ $restaurant->name }}</div>
+                                <div class="card-subtitle mb-2 text-muted">{{ $restaurant->address }}</div>
+                                {{ $restaurant->description }}
+                                <footer class="blockquote-footer">
+                                    @foreach($restaurant->services as $service)
+                                        {{ $service->label }}
+                                    @endforeach
+                                    @foreach($restaurant->kitchens as $kitchen)
+                                        {{ $kitchen->label }}
+                                    @endforeach
+                                </footer>
+                            </div>
+                        </a>
                     </div>
                 </div>
             @endforeach

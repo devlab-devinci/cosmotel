@@ -38,6 +38,7 @@ fin soir: heure
             $table->integer('service_interval')->nullable();
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
+            $table->text('status');
             $table->timestamps();
 
             $table->foreign('restaurateur_id')->references('id')->on('restaurateurs')

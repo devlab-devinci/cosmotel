@@ -15,7 +15,7 @@
                             <label for="discount" class="col-md-4 col-form-label text-md-right">Discount</label>
 
                             <div class="col-md-6">
-                                <input id="discount" type="number" min="1" max="100" class="form-control{{ $errors->has('discount') ? ' is-invalid' : '' }}" name="discount" required autofocus>
+                                <input id="discount" type="number" min="1" max="100" class="form-control{{ $errors->has('discount') ? ' is-invalid' : '' }}" name="discounts[1][discount]" required autofocus>
 
                                 @if ($errors->has('discount'))
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="discount" class="col-md-4 col-form-label text-md-right">Minimum subscribers</label>
 
                             <div class="col-md-6">
-                                <input id="subscribers" type="number" step="500" class="form-control{{ $errors->has('subscribers') ? ' is-invalid' : '' }}" name="subscribers" required autofocus>
+                                <input id="subscribers" type="number" step="500" class="form-control{{ $errors->has('subscribers') ? ' is-invalid' : '' }}" name="discounts[1][subscribers]" required autofocus>
 
                                 @if ($errors->has('subscribers'))
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="discount" class="col-md-4 col-form-label text-md-right">Minimum stories</label>
 
                             <div class="col-md-6">
-                                <input id="stories" type="number" step="1" class="form-control{{ $errors->has('stories') ? ' is-invalid' : '' }}" name="stories" required autofocus>
+                                <input id="stories" type="number" step="1" class="form-control{{ $errors->has('stories') ? ' is-invalid' : '' }}" name="discounts[1][stories]" required autofocus>
 
                                 @if ($errors->has('stories'))
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                             <label for="discount" class="col-md-4 col-form-label text-md-right">Minimum posts</label>
 
                             <div class="col-md-6">
-                                <input id="posts" type="number" step="1" class="form-control{{ $errors->has('posts') ? ' is-invalid' : '' }}" name="posts" required autofocus>
+                                <input id="posts" type="number" step="1" class="form-control{{ $errors->has('posts') ? ' is-invalid' : '' }}" name="discounts[1][posts]" required autofocus>
 
                                 @if ($errors->has('posts'))
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Publish new discount
                                 </button>
                             </div>
                         </div>
