@@ -3,17 +3,28 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Kitchen;
+use App\Service;
 
 class Restaurant extends Model
 {
     protected $fillable = [
-        'restaurateur_id', 'name', 'address', 'description', 'latitude', 'longitude'
+        'restaurateur_id', 'name', 'address', 'description', 'latitude', 'longitude', 'title'
     ];
 
     /**
      * Get the list of services provided by the restaurant
      */
     public function services()
+    {
+        return $this->belongsToMany('App\Service', 'restaurant_service',
+            'restaurant_id', 'service_id');
+    }
+
+    /**
+     * Get the list of services provided by the restaurant
+     */
+    public function servicesId()
     {
         return $this->belongsToMany('App\Service', 'restaurant_service',
             'restaurant_id', 'service_id');
@@ -50,5 +61,21 @@ class Restaurant extends Model
     public function discounts()
     {
         return $this->hasMany('App\Discount', 'restaurant_id');
+    }
+
+    /**
+     * Get the list of discounts provided by the restaurant
+     */
+    public function openings()
+    {
+        return $this->hasMany('App\Opening', 'restaurant_id')->orderBy('day');
+    }
+
+    /**
+     * Get the list of discounts provided by the restaurant
+     */
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation', 'restaurant_id');
     }
 }
