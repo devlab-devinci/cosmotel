@@ -46,8 +46,13 @@ Route::get('/login/{type}', [
 ]);
 
 Route::get('/myAccount', [
-	'as' => 'myAccount::show',
-	'uses' => 'UserController@myAccount'
+    'as' => 'myAccount::show',
+    'uses' => 'UserController@myAccount'
+]);
+
+Route::get('/restaurateur', [
+	'as' => 'restaurateur',
+	'uses' => 'RestaurateurController@index'
 ]);
 
 Route::put('/myAccount', [
@@ -70,13 +75,14 @@ Route::group(
 		]);
 
 		Route::get('/blog', [
-			'as' => 'blog',
-			'uses' => 'GuestController@blog'
-		]);
+		    'as' => 'blog',
+            'uses' => 'GuestController@blog'
+        ]);
+
 		Route::get('/contact', [
-			'as' => 'contact',
-			'uses' => 'GuestController@contact'
-		]);
+		    'as' => 'contact',
+            'uses' => 'GuestController@contact'
+        ]);
 });
 
 Route::group(
@@ -84,10 +90,24 @@ Route::group(
         'prefix'     => 'influencer',
         'as'         => 'influencer::',
     ], function () {
-    	Route::get('/search', [
-			'as' => 'search',
-			'uses' => 'InfluencerController@search'
-		]);
+    Route::get('/search', [
+        'as' => 'search',
+        'uses' => 'InfluencerController@search'
+    ]);
+    Route::get('/{id}', [
+        'as' => 'influencer.show',
+        'uses' => 'UserController@show'
+    ]);
+
+    Route::get('/{id}/edit', [
+        'as' => 'influencer.edit',
+        'uses' => 'UserController@edit'
+    ]);
+
+    Route::put('/{id}', [
+        'as' => 'influencer.update',
+        'uses' => 'UserController@update'
+    ]);
 });
 
 Route::group(
@@ -95,53 +115,124 @@ Route::group(
         'prefix' => 'restaurant',
         'as' => 'restaurant::',
     ], function() {
-        /*Route::post('/getOne', [
-            'as' => 'getOne',
-            'uses' => 'RestaurantController@getOne'
-        ]);*/
-        Route::get('/getOne/{id}', [
-            'as' => 'getOne',
-            'uses' => 'RestaurantController@getOne'
+    /*Route::post('/getOne', [
+        'as' => 'getOne',
+        'uses' => 'RestaurantController@getOne'
+    ]);*/
+    Route::get('/getOne/{id}', [
+        'as' => 'getOne',
+        'uses' => 'RestaurantController@getOne'
+    ]);
+});
+
+Route::group(
+    [
+        'prefix'     => 'restaurateur',
+        'as'         => 'restaurateur.',
+        'middleware' => 'is.restaurateur',
+    ], function () {
+        Route::get('/dashboard', [
+            'as' => 'dashboard',
+            'uses' => 'RestaurateurController@dashboard'
+        ]);
+
+    	Route::get('/{id}', [
+			'as' => 'show',
+			'uses' => 'UserController@show'
+		]);
+
+		Route::get('/{id}/edit', [
+			'as' => 'edit',
+			'uses' => 'UserController@edit'
+		]);
+
+		Route::put('/{id}', [
+			'as' => 'update',
+			'uses' => 'UserController@update'
+		]);
+
+        Route::get('restaurant/single/{id}', [
+            'as' => 'restaurant::show',
+            'uses' => 'RestaurantController@show'
+        ]);
+
+		Route::get('restaurant/create', [
+            'as' => 'restaurant::create',
+            'uses' => 'RestaurantController@create'
+        ]);
+
+        Route::post('restaurant/create', [
+            'as' => 'restaurant::store',
+            'uses' => 'RestaurantController@store'
+        ]);
+
+        Route::get('restaurant/edit/{id}', [
+            'as' => 'restaurant::edit',
+            'uses' => 'RestaurantController@edit'
+        ]);
+
+        Route::post('restaurant/edit/{id}', [
+            'as' => 'restaurant::update',
+            'uses' => 'RestaurantController@update'
+        ]);
+
+        Route::post('restaurant/addProducts', [
+        'as' => 'product::store',
+        'uses' => 'ProductController@store'
+        ]);
+
+        Route::get('restaurant/editProducts/{id}', [
+            'as' => 'product::edit',
+            'uses' => 'ProductController@edit'
+        ]);
+
+        Route::post('restaurant/editProducts/', [
+            'as' => 'product::update',
+            'uses' => 'ProductController@update'
+        ]);
+
+        Route::post('restaurant/addOpenings', [
+            'as' => 'opening::store',
+            'uses' => 'OpeningController@store'
+        ]);
+
+        Route::get('restaurant/editOpenings/{id}', [
+            'as' => 'opening::edit',
+            'uses' => 'OpeningController@edit'
+        ]);
+
+        Route::post('restaurant/editOpenings', [
+            'as' => 'opening::update',
+            'uses' => 'OpeningController@update'
+        ]);
+
+        Route::post('restaurant/addDiscount', [
+            'as' => 'discount::store',
+            'uses' => 'DiscountController@store'
+        ]);
+
+        Route::get('restaurant/editDiscount/{id}', [
+            'as' => 'discount::edit',
+            'uses' => 'DiscountController@edit'
+        ]);
+
+        Route::post('restaurant/editDiscount', [
+            'as' => 'discount::update',
+            'uses' => 'DiscountController@update'
         ]);
 });
 
 
+Route::get('/restaurants', [
+	'as' => 'restaurants',
+	'uses' => 'RestaurantController@index'
+]);
 
+Route::get('/reservations', [
+	'as' => 'reservations',
+	'uses' => 'UserController@reservations'
+]);
 
-
-// /////// INFLUENCER
-// Route::get('/influencer/{id}', [
-// 	'as' => 'influencer.show',
-// 	'uses' => 'UserController@show'
-// ]);
-
-// Route::get('/influencer/{id}/edit', [
-// 	'as' => 'influencer.edit',
-// 	'uses' => 'UserController@edit'
-// ]);
-
-// Route::put('/influencer/{id}', [
-// 	'as' => 'influencer.update',
-// 	'uses' => 'UserController@update'
-// ]);
-
-
-// /////
-
-// Route::get('/restaurants', [
-// 	'as' => 'restaurants',
-// 	'uses' => 'RestaurantController@index'
-// ]);
-
-// Route::get('/messages', [
-// 	'as' => 'messages',
-// 	'uses' => 'UserController@messages'
-// ]);
-
-// Route::get('/reservations', [
-// 	'as' => 'reservations',
-// 	'uses' => 'UserController@reservations'
-// ]);
 
 
 

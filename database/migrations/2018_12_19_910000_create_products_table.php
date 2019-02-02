@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('label');
             $table->decimal('price', 10,2);
-            $table->string('currency');
+            $table->string('currency')->nullable();
             $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants');

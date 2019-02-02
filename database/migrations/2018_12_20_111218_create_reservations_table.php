@@ -15,14 +15,15 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('restaurant_id')->unsigned();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->integer('influencer_id')->unsigned();
             $table->foreign('influencer_id')->references('id')->on('influencers')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->integer('discount_id')->unsigned();
-            $table->foreign('discount_id')->references('id')->on('discounts')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            $table->string('discount')->comment = "Percentage";
             $table->timestamp('dateTime');
             $table->integer('client_count');
             $table->timestamps();
