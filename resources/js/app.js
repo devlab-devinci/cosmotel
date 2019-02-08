@@ -1,36 +1,42 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
-
-window.Vue = require('vue');
-
 /**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Main JS file.
+ * Please keep it clean.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+var maxHeightRestaurant = 0;
+var $restaurant = $('.restaurant');
+var $gor = {
+  name : $('.GORName'),
+  description : $('.GORDescription'),
+  // informations :
+};
+$(document).ready( function() {
 
-// const files = require.context('./', true, /\.vue$/i)
+  if ($restaurant.length > 0) {
+    $.each($restaurant, function(index) {
+      if ($(this).height() > maxHeightRestaurant) {
+        maxHeightRestaurant = $(this).height();
+      }
+    });
 
-// files.keys().map(key => {
-//     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
-// })
+    $restaurant.children().height(maxHeightRestaurant);
+  }
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app'
+  $restaurant.click( function() {
+    var urlToUse = url+"/restaurant/getOne/"+$(this).attr('data-id');
+    console.log(url);
+    $.ajax({
+      url: urlToUse,
+      type: 'GET',
+      error: function (jqXHR, status, errorCode) {
+        console.log(status);
+      }
+    }).done(function (response, status, jqXHR) {
+      $gor.name.html(response.restaurant.name);
+      $gor.description.html(response.restaurant.description);
+      // $gor.informations.restaurateur.html(response.)
+    });
+  });
 });

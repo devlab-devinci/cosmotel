@@ -1,0 +1,14 @@
+/*
+ * Font faces declaration
+ * Based on the mixin @ config/mixins.scss
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700');
+// Available : 200,300,400,600,700,800,900
+
+$gfont: 'Nunito';
+
+$flite: 300;
+$freg: 400;
+$fsemibold: 600;
+$fbold: 700;
