@@ -78,4 +78,12 @@ class Restaurant extends Model
     {
         return $this->hasMany('App\Reservation', 'restaurant_id');
     }
+
+    /**
+     * Get the restaurateur that owns the restaurant.
+     */
+    public function images()
+    {
+        return $this->hasMany('App\Image', 'restaurant_id');
+    }
 }

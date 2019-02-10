@@ -18,6 +18,12 @@
                     </div>
 
                     <div class="card-body">
+                        @foreach($restaurant->images as $image)
+                            <img class="img-thumbnail m-2" src="{{ URL::to('/') }}/{{ $image->src }}">
+                        @endforeach
+                    </div>
+
+                    <div class="card-body">
                         <a href="{{ route('restaurateur.restaurant::edit', $restaurant->id) }}">Edit basic</a>
                     </div>
 

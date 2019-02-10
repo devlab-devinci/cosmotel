@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Kitchen;
 use App\Service;
+use http\Exception;
 use Illuminate\Http\Request;
 use App\Restaurant;
 use App\Restaurateur;
 use App\RestaurantService;
 use App\RestaurantKitchen;
 use App\Discount;
+use App\Images;
 use Auth;
 use App\ProductCategory;
 
@@ -69,6 +72,22 @@ class RestaurantController extends Controller
         $restaurant->restaurateur_id = $restaurateur->id;
         $restaurant->status = 'draft';
         $restaurant->save();
+
+
+        if ($request->hasFile('images')) {
+            $destinationPath = 'public/uploads';
+
+            foreach ($request->file('images') as $image) {
+
+                $filename = $image->getClientOriginalName();
+                $image->move($destinationPath, $filename);
+
+                $newImage = new Image;
+                $newImage->restaurant_id = $restaurant->id;
+                $newImage->src = $destinationPath . '/' . $filename;
+                $newImage->save();
+            }
+        }
 
         $services = Service::find($request->services);
         $restaurant->services()->sync($services);
