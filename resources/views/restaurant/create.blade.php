@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header mb-3">Register a new restaurant</div>
 
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -32,6 +32,20 @@
                                 @if ($errors->has('description'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="images" class="col-md-4 col-form-label text-md-right">Images</label>
+
+                            <div class="col-md-6">
+
+                                <input id="images" type="file" class="form-control{{ $errors->has('images') ? ' is-invalid' : '' }}" name="images[]" multiple required autofocus>
+                                @if ($errors->has('images'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('images') }}</strong>
                                     </span>
                                 @endif
                             </div>
