@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
                 return route('influencer::search');
             } else if (Auth::user()->type == 0)
             {
-                return route('restaurateur');
+                return route('restaurateur.dashboard');
             }
         }
 

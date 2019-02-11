@@ -23,7 +23,10 @@ class CreateReservationsTable extends Migration
             $table->foreign('influencer_id')->references('id')->on('influencers')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
+            $table->string('status');
             $table->string('discount')->comment = "Percentage";
+            $table->string('stories')->nullable();
+            $table->string('posts')->nullable();
             $table->timestamp('dateTime');
             $table->integer('client_count');
             $table->timestamps();

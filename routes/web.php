@@ -89,6 +89,7 @@ Route::group(
     [
         'prefix'     => 'influencer',
         'as'         => 'influencer::',
+        'middleware' => 'is.influencer',
     ], function () {
     Route::get('/search', [
         'as' => 'search',
@@ -107,6 +108,16 @@ Route::group(
     Route::put('/{id}', [
         'as' => 'influencer.update',
         'uses' => 'UserController@update'
+    ]);
+
+    Route::get('restaurant/single/{id}', [
+        'as' => 'restaurant::show',
+        'uses' => 'InfluencerController@select'
+    ]);
+
+    Route::post('restaurant/single', [
+        'as' => 'reservation::store',
+        'uses' => 'InfluencerController@createReservation'
     ]);
 });
 
