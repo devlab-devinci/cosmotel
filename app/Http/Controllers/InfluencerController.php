@@ -22,11 +22,11 @@ class InfluencerController extends Controller
         return view('influencer.search', compact('restaurants'));
     }
 
-    public function select($id)
+    public function showRestaurant($id)
     {
         $restaurant = Restaurant::find($id);
 
-        return view('influencer.select', ['restaurant' => $restaurant]);
+        return view('influencer.restaurant.show', ['restaurant' => $restaurant]);
     }
 
 
@@ -45,10 +45,10 @@ class InfluencerController extends Controller
         $reservation->posts = $discount->posts;
         $reservation->client_count = $request->number;
         $reservation->dateTime = $date;
-        $reservation->status = "Pending";
+        $reservation->status = "pending";
         $reservation->save();
 
-        return route('influencer::dashboard');
+        return view('influencer.reservation.list', ['reservations' => $influencer->reservations]);
     }
 
     public function reservationList()
@@ -61,6 +61,15 @@ class InfluencerController extends Controller
     public function reservationSingle($id)
     {
         $reservation = Reservation::find($id);
+
+        return view('influencer.reservation.show', ['reservation' => $reservation]);
+    }
+
+    public function reservationUpdate(Request $request, $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->status = $request->status;
+        $reservation->update();
 
         return view('influencer.reservation.show', ['reservation' => $reservation]);
     }

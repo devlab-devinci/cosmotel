@@ -24,18 +24,10 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
-                        @if ($reservation->status === "rejected")
+                        @if ($reservation->status === "pending")
                             <button type="submit" value="approved" name="status" class="btn btn-primary">
                                 Validate
                             </button>
-                        @elseif ($reservation->status === "pending")
-                            <button type="submit" value="approved" name="status" class="btn btn-primary">
-                                Validate
-                            </button>
-                            <button type="submit" value="rejected" name="status" class="btn btn-secondary">
-                                Reject
-                            </button>
-                        @else
                             <button type="submit" value="rejected" name="status" class="btn btn-secondary">
                                 Reject
                             </button>

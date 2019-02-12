@@ -108,7 +108,7 @@ Route::group(
 
     Route::get('restaurant/single/{id}', [
         'as' => 'restaurant.show',
-        'uses' => 'InfluencerController@select'
+        'uses' => 'InfluencerController@showRestaurant'
     ]);
 
     Route::post('restaurant/single', [
@@ -124,6 +124,11 @@ Route::group(
     Route::get('reservation/{id}', [
         'as' => 'reservation.show',
         'uses' => 'InfluencerController@reservationSingle'
+    ]);
+
+    Route::post('reservation/{id}', [
+        'as' => 'reservation.update',
+        'uses' => 'InfluencerController@reservationUpdate'
     ]);
 });
 

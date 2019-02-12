@@ -15,7 +15,7 @@
                     </div>
 
 
-                    <form method="POST" action="{{ route('influencer::reservation::store') }}">
+                    <form method="POST" action="{{ route('influencer::reservation.store') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
