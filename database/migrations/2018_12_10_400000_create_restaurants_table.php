@@ -6,21 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRestaurantsTable extends Migration
 {
-/*
-Table Horraire Ouverture
-Lundi:
-ouvert matin: true/false
-début matin: heure
-fin matin: heure
-
-ouvert midi: true/false
-debut midi: heure
-fin midi: heure
-
-ouvert soir: true/false
-debut soir: heure
-fin soir: heure
-*/
 
     /**
      * Run the migrations.

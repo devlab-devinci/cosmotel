@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header mb-3">Update you restaurant discount</div>
-                    <form method="POST" action="{{ route('restaurateur.discount::update') }}">
+                    <form method="POST" action="{{ route('restaurateur::discount.update') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">

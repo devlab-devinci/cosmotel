@@ -95,12 +95,8 @@ Route::group(
         'as' => 'search',
         'uses' => 'InfluencerController@search'
     ]);
-    Route::get('/{id}', [
-        'as' => 'influencer.show',
-        'uses' => 'UserController@show'
-    ]);
 
-    Route::get('/{id}/edit', [
+    Route::get('profile/{id}/edit', [
         'as' => 'influencer.edit',
         'uses' => 'UserController@edit'
     ]);
@@ -111,13 +107,23 @@ Route::group(
     ]);
 
     Route::get('restaurant/single/{id}', [
-        'as' => 'restaurant::show',
+        'as' => 'restaurant.show',
         'uses' => 'InfluencerController@select'
     ]);
 
     Route::post('restaurant/single', [
-        'as' => 'reservation::store',
+        'as' => 'reservation.store',
         'uses' => 'InfluencerController@createReservation'
+    ]);
+
+    Route::get('reservation', [
+        'as' => 'reservation.list',
+        'uses' => 'InfluencerController@reservationList'
+    ]);
+
+    Route::get('reservation/{id}', [
+        'as' => 'reservation.show',
+        'uses' => 'InfluencerController@reservationSingle'
     ]);
 });
 
@@ -139,7 +145,7 @@ Route::group(
 Route::group(
     [
         'prefix'     => 'restaurateur',
-        'as'         => 'restaurateur.',
+        'as'         => 'restaurateur::',
         'middleware' => 'is.restaurateur',
     ], function () {
         Route::get('/dashboard', [
@@ -163,87 +169,85 @@ Route::group(
 		]);
 
         Route::get('restaurant/single/{id}', [
-            'as' => 'restaurant::show',
+            'as' => 'restaurant.show',
             'uses' => 'RestaurantController@show'
         ]);
 
 		Route::get('restaurant/create', [
-            'as' => 'restaurant::create',
+            'as' => 'restaurant.create',
             'uses' => 'RestaurantController@create'
         ]);
 
         Route::post('restaurant/create', [
-            'as' => 'restaurant::store',
+            'as' => 'restaurant.store',
             'uses' => 'RestaurantController@store'
         ]);
 
         Route::get('restaurant/edit/{id}', [
-            'as' => 'restaurant::edit',
+            'as' => 'restaurant.edit',
             'uses' => 'RestaurantController@edit'
         ]);
 
         Route::post('restaurant/edit/{id}', [
-            'as' => 'restaurant::update',
+            'as' => 'restaurant.update',
             'uses' => 'RestaurantController@update'
         ]);
 
         Route::post('restaurant/addProducts', [
-        'as' => 'product::store',
+        'as' => 'product.store',
         'uses' => 'ProductController@store'
         ]);
 
         Route::get('restaurant/editProducts/{id}', [
-            'as' => 'product::edit',
+            'as' => 'product.edit',
             'uses' => 'ProductController@edit'
         ]);
 
         Route::post('restaurant/editProducts/', [
-            'as' => 'product::update',
+            'as' => 'product.update',
             'uses' => 'ProductController@update'
         ]);
 
         Route::post('restaurant/addOpenings', [
-            'as' => 'opening::store',
+            'as' => 'opening.store',
             'uses' => 'OpeningController@store'
         ]);
 
         Route::get('restaurant/editOpenings/{id}', [
-            'as' => 'opening::edit',
+            'as' => 'opening.edit',
             'uses' => 'OpeningController@edit'
         ]);
 
         Route::post('restaurant/editOpenings', [
-            'as' => 'opening::update',
+            'as' => 'opening.update',
             'uses' => 'OpeningController@update'
         ]);
 
         Route::post('restaurant/addDiscount', [
-            'as' => 'discount::store',
+            'as' => 'discount.store',
             'uses' => 'DiscountController@store'
         ]);
 
         Route::get('restaurant/editDiscount/{id}', [
-            'as' => 'discount::edit',
+            'as' => 'discount.edit',
             'uses' => 'DiscountController@edit'
         ]);
 
         Route::post('restaurant/editDiscount', [
-            'as' => 'discount::update',
+            'as' => 'discount.update',
             'uses' => 'DiscountController@update'
         ]);
+
+        Route::get('restaurant/reservation/single/{id}', [
+            'as' => 'reservation.show',
+            'uses' => 'RestaurateurController@reservationSingle'
+        ]);
+
+        Route::post('restaurant/reservation/single/{id}', [
+            'as' => 'reservation.update',
+            'uses' => 'RestaurateurController@reservationUpdate'
+        ]);
 });
-
-
-Route::get('/restaurants', [
-	'as' => 'restaurants',
-	'uses' => 'RestaurantController@index'
-]);
-
-Route::get('/reservations', [
-	'as' => 'reservations',
-	'uses' => 'UserController@reservations'
-]);
-
 
 
 

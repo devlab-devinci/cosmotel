@@ -13,7 +13,7 @@ class CreateDiscountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discounts', function (Blueprint $table) {
+        Schema::create('discount', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('restaurant_id')->unsigned();
             $table->string('discount')->comment = "Percentage";
@@ -35,6 +35,6 @@ class CreateDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('discount');
     }
 }

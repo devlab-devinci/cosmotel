@@ -44,7 +44,7 @@ class DiscountController extends Controller
             }
         }
 
-        return redirect()->route('restaurateur.restaurant::show', $request->restaurant_id);
+        return redirect()->route('restaurateur::restaurant.show', $request->restaurant_id);
     }
 
     /**
@@ -57,7 +57,7 @@ class DiscountController extends Controller
     {
         $restaurant = Restaurant::find($id);
 
-        return view('discounts.edit', ['restaurant_id' => $id, 'current_discounts' => $restaurant->discounts]);
+        return view('restaurateur.discount.edit', ['restaurant_id' => $id, 'current_discounts' => $restaurant->discounts]);
     }
 
     /**
@@ -100,7 +100,7 @@ class DiscountController extends Controller
                     }
                 }
             }
-            return view('restaurant.show', ['restaurant' => $restaurant]);
+            return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
         }
         return redirect()->action('RestaurateurController@dashboard');
     }

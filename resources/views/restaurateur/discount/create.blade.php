@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header mb-3">Register your first dicount</div>
-                    <form method="POST" action="{{ route('restaurateur.discount::store') }}">
+                    <form method="POST" action="{{ route('restaurateur::discount.store') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">

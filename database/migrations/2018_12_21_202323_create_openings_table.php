@@ -13,7 +13,7 @@ class CreateOpeningsTable extends Migration
      */
     public function up()
     {
-        Schema::create('openings', function (Blueprint $table) {
+        Schema::create('opening', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')
@@ -40,6 +40,6 @@ class CreateOpeningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('openings');
+        Schema::dropIfExists('opening');
     }
 }

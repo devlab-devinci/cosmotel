@@ -22,4 +22,12 @@ class Influencer extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    /**
+     * Get the list of discount provided by the restaurant
+     */
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation', 'influencer_id');
+    }
 }

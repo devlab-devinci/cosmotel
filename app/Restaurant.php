@@ -56,7 +56,7 @@ class Restaurant extends Model
     }
 
     /**
-     * Get the list of discounts provided by the restaurant
+     * Get the list of discount provided by the restaurant
      */
     public function discounts()
     {
@@ -64,7 +64,7 @@ class Restaurant extends Model
     }
 
     /**
-     * Get the list of discounts provided by the restaurant
+     * Get the list of discount provided by the restaurant
      */
     public function openings()
     {
@@ -72,7 +72,7 @@ class Restaurant extends Model
     }
 
     /**
-     * Get the list of discounts provided by the restaurant
+     * Get the list of discount provided by the restaurant
      */
     public function reservations()
     {

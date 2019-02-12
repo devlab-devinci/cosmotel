@@ -29,12 +29,7 @@ class InfluencerController extends Controller
         return view('influencer.select', ['restaurant' => $restaurant]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function createReservation(Request $request)
     {
         $influencer = Auth::user()->influencer;
@@ -54,5 +49,19 @@ class InfluencerController extends Controller
         $reservation->save();
 
         return route('influencer::dashboard');
+    }
+
+    public function reservationList()
+    {
+        $reservations = Auth::user()->influencer->reservations;
+
+        return view('influencer.reservation.list', ['reservations' => $reservations]);
+    }
+
+    public function reservationSingle($id)
+    {
+        $reservation = Reservation::find($id);
+
+        return view('influencer.reservation.show', ['reservation' => $reservation]);
     }
 }

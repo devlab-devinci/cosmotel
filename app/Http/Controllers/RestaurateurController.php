@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Reservation;
 use Auth;
 
 class RestaurateurController extends Controller
@@ -32,5 +33,21 @@ class RestaurateurController extends Controller
         }
 
         return view('restaurateur.dashboard', ['restaurants' => $restaurants, 'reservations' => $reservations]);
+    }
+
+    public function reservationSingle($id)
+    {
+        $reservation = Reservation::find($id);
+
+        return view('restaurateur.reservation.show', ['reservation' => $reservation]);
+    }
+
+    public function reservationUpdate(Request $request, $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->status = $request->status;
+        $reservation->update();
+
+        return view('restaurateur.reservation.show', ['reservation' => $reservation]);
     }
 }
