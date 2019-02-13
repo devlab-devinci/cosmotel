@@ -91,7 +91,13 @@ Route::group(
         'as'         => 'influencer::',
         'middleware' => 'is.influencer',
     ], function () {
+
     Route::get('/search', [
+        'as' => 'search',
+        'uses' => 'InfluencerController@search'
+    ]);
+
+    Route::post('/search', [
         'as' => 'search',
         'uses' => 'InfluencerController@search'
     ]);

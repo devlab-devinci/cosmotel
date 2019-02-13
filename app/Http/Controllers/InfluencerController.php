@@ -11,16 +11,20 @@ use Auth;
 
 class InfluencerController extends Controller
 {
-    /*public function __construct()
+    public function search(Request $request)
     {
-        $this->middleware('influencer');
-    }*/
+        // TODO: Apply more query parameters
 
-    public function search()
-    {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::where('status', '=', 'public')->simplePaginate(10);
+
+        if ($request->ajax()) {
+            $view = view('influencer.restaurant.list',compact('restaurants'))->render();
+            return response()->json(['html'=>$view]);
+        }
+
         return view('influencer.search', compact('restaurants'));
     }
+
 
     public function showRestaurant($id)
     {
