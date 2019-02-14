@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="card-body">
-                        <a href="{{ route('restaurateur.restaurant::edit', $restaurant->id) }}">Edit basic</a>
+                        <a href="{{ route('restaurateur::restaurant.edit', $restaurant->id) }}">Edit basic</a>
                     </div>
 
                     <div class="card-body">
@@ -52,21 +52,38 @@
                     </div>
 
                     <div class="card-body">
-                        <a href="{{ route('restaurateur.opening::edit', $restaurant->id) }}">Edit openings</a>
+                        <a href="{{ route('restaurateur::opening.edit', $restaurant->id) }}">Edit openings</a>
                     </div>
 
                     <div class="card-body">
                         <div class="card-subtitle">Openings :</div>
                         @foreach($restaurant->openings as $opening)
-                            <div class="card-title">{{ $opening->day }}</div>
-                            <div class="card-title">{{ $opening->open_morning }}</div>
-                            <div class="card-title">{{ $opening->open_lunch }}</div>
-                            <div class="card-title">{{ $opening->open_dinner }}</div>
+                            <div class="card-title">{{ jddayofweek($opening->day, 1) }}</div>
+                            <div class="card-title">Morning</div>
+                            @if ($opening->open_morning)
+                                From {{ $opening->open_time_morning }} to {{ $opening->close_time_morning }}
+                            @else
+                                Closed
+                            @endif
+
+                            <div class="card-title">Lunch</div>
+                            @if ($opening->open_lunch)
+                                From {{ $opening->open_time_lunch }} to {{ $opening->close_time_lunch }}
+                            @else
+                                Closed
+                            @endif
+
+                            <div class="card-title">Dinner</div>
+                            @if ($opening->open_dinner)
+                                From {{ $opening->open_time_dinner }} to {{ $opening->close_time_dinner }}
+                            @else
+                                Closed
+                            @endif
                         @endforeach
                     </div>
 
                     <div class="card-body">
-                        <a href="{{ route('restaurateur.discount::edit', $restaurant->id) }}">Edit discounts</a>
+                        <a href="{{ route('restaurateur::discount.edit', $restaurant->id) }}">Edit discounts</a>
                     </div>
 
                     <div class="card-body">
@@ -81,7 +98,7 @@
                     </div>
 
                     <div class="card-body">
-                        <a href="{{ route('restaurateur.product::edit', $restaurant->id) }}">Edit menu</a>
+                        <a href="{{ route('restaurateur::product.edit', $restaurant->id) }}">Edit menu</a>
                     </div>
 
                     <div class="card-body">

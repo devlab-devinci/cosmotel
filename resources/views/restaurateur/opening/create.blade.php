@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header mb-3">Register a part of your menu</div>
-                    <form method="POST" action="{{ route('restaurateur.opening::store') }}">
+                    <form method="POST" action="{{ route('restaurateur::opening.store') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">

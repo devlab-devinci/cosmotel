@@ -81,7 +81,7 @@ class ProductController extends Controller
                 'dinner'
             ];
 
-            return view('openings.create', ['restaurant_id' => $request->restaurant_id, 'days' => $days, 'times' => $times]);
+            return view('restaurateur.opening.create', ['restaurant_id' => $request->restaurant_id, 'days' => $days, 'times' => $times]);
         }
 
         return redirect()->action('RestaurateurController@dashboard');
@@ -98,7 +98,7 @@ class ProductController extends Controller
         $product_categories = ProductCategory::all();
         $restaurant = Restaurant::find($id);
 
-        return view('products.edit', ['current_products' => $restaurant->products, 'restaurant_id' => $id, 'product_categories' => $product_categories]);
+        return view('restaurateur.product.edit', ['current_products' => $restaurant->products, 'restaurant_id' => $id, 'product_categories' => $product_categories]);
     }
 
     /**
@@ -141,7 +141,7 @@ class ProductController extends Controller
                     }
                 }
             }
-            return view('restaurant.show', ['restaurant' => $restaurant]);
+            return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
         }
         return redirect()->action('RestaurateurController@dashboard');
     }

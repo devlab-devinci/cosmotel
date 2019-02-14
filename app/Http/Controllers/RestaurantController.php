@@ -51,7 +51,7 @@ class RestaurantController extends Controller
         $kitchens = Kitchen::all();
         $services = Service::all();
 
-        return view('restaurant.create', ['kitchens' => $kitchens, "services" => $services]);
+        return view('restaurateur.restaurant.create', ['kitchens' => $kitchens, "services" => $services]);
     }
 
     /**
@@ -97,7 +97,7 @@ class RestaurantController extends Controller
 
         $product_categories = ProductCategory::all();
 
-        return view('products.create', ['restaurant_id' => $restaurant->id, 'product_categories' => $product_categories]);
+        return view('restaurateur.product.create', ['restaurant_id' => $restaurant->id, 'product_categories' => $product_categories]);
     }
 
     /**
@@ -110,7 +110,12 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
 
-        return view('restaurant.show', ['restaurant' => $restaurant]);
+        if (Auth::user() && $restaurant->restaurateur_id === Auth::user()->restaurateur->id) {
+            return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
+        }
+        else {
+            return view('restaurant.show', ['restaurant' => $restaurant]);
+        }
     }
 
     /**
@@ -171,7 +176,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::where('id', $id)
             ->with('restaurateur')
             ->with('kitchens')
-            ->with('discounts')
+            ->with('discount')
             ->first();
 
         $user = $restaurant->restaurateur->user;

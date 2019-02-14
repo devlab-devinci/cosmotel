@@ -67,7 +67,7 @@ class OpeningController extends Controller
                 $newOpening->save();
             }
 
-        return view('discounts.create', ['restaurant_id' => $request->restaurant_id]);
+        return view('restaurateur.discount.create', ['restaurant_id' => $request->restaurant_id]);
     }
 
 
@@ -86,7 +86,7 @@ class OpeningController extends Controller
             'dinner'
         ];
 
-        return view('openings.edit', ['restaurant_id' => $id, 'current_openings' => $restaurant->openings, 'times' => $times]);
+        return view('restaurateur.opening.edit', ['restaurant_id' => $id, 'current_openings' => $restaurant->openings, 'times' => $times]);
     }
 
     /**
@@ -137,6 +137,6 @@ class OpeningController extends Controller
                 $newOpening->save();
             }
 
-        return view('restaurant.show', ['restaurant' => $restaurant]);
+        return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
     }
 }

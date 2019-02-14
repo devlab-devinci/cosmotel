@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header mb-3">Register a part of your menu</div>
-                    <form method="POST" action="{{ route('restaurateur.opening::update') }}">
+                    <form method="POST" action="{{ route('restaurateur::opening.update') }}">
                         @csrf
 
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">
@@ -15,14 +15,14 @@
 
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <h2>{{ $opening->day }}</h2>
+                                    <h2>{{ jddayofweek($opening->day, 1) }}</h2>
                                 </div>
 
                                 <input type="hidden" name="days[{{ $opening->day }}][id]" value="{{ $opening->id }}">
 
                                 @foreach($times as $time)
 
-                                    <label for="{{ $opening->day }}_{{ $time }}" class="col-md-3 col-form-label text-md-right">Open on {{ $opening->day }} - {{ $time }}</label>
+                                    <label for="{{ $opening->day }}_{{ $time }}" class="col-md-3 col-form-label text-md-right">Open on {{ jddayofweek($opening->day, 1) }} - {{ $time }}</label>
 
                                     <div class="col-md-1">
                                         <input id="{{ $opening->day }}_{{ $time }}"  @if($opening->{'open_' . $time}) checked @endif type="checkbox" class="form-control{{ $errors->has($opening->day . '_' . $time) ? ' is-invalid' : '' }}" name="days[{{ $opening->day }}][open_{{ $time }}]" autofocus>

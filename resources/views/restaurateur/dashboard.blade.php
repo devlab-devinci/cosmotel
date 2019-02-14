@@ -11,42 +11,25 @@
 
     <div class="container">
         <div class="row">
-            <h2>Past reservations</h2>
+            <h2>Reservations</h2>
         </div>
         <div class="row">
             @foreach($reservations as $reservation)
                 @if( $reservation)
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">{{ $reservation->influencer_id }}</div>
-                                <div class="card-subtitle mb-2 text-muted">{{ $reservation->restaurant_id }}</div>
-                                {{ $reservation->client_count }}
-                                <footer class="blockquote-footer">{{ $reservation->discount }}</footer>
+                        @if ($reservation->status === "pending")
+                        <h5>Action required</h5>
+                        @endif
+                        <a href="{{ route('restaurateur::reservation.show', $reservation->id) }}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">{{ $reservation->influencer_id }}</div>
+                                    <div class="card-subtitle mb-2 text-muted">{{ $reservation->restaurant_id }}</div>
+                                    {{ $reservation->client_count }}
+                                    <footer class="blockquote-footer">{{ $reservation->discount }}</footer>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <h2>Ongoing reservations</h2>
-        </div>
-        <div class="row">
-            @foreach($reservations as $reservation)
-                @if( $reservation)
-                    <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">{{ $reservation->influencer_id }}</div>
-                                <div class="card-subtitle mb-2 text-muted">{{ $reservation->restaurant_id }}</div>
-                                {{ $reservation->client_count }}
-                                <footer class="blockquote-footer">{{ $reservation->discount }}</footer>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 @endif
             @endforeach
@@ -61,7 +44,7 @@
             @foreach($restaurants as $restaurant)
                 <div class="col-12 col-sm-6 col-md-4 mb-3">
                     <div class="card">
-                        <a href="{{ route('restaurateur.restaurant::show', $restaurant->id) }}">
+                        <a href="{{ route('restaurateur::restaurant.show', $restaurant->id) }}">
                             <div class="card-body">
                                 <div class="card-title">{{ $restaurant->name }}</div>
                                 <div class="card-subtitle mb-2 text-muted">{{ $restaurant->address }}</div>
@@ -80,7 +63,7 @@
                 </div>
             @endforeach
             <div class="col-12 col-sm-6 col-md-4 mb-3">
-                <a class="dropdown-item" href="{{ route('restaurateur.restaurant::create') }}">
+                <a class="dropdown-item" href="{{ route('restaurateur::restaurant.create') }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">Register a new restaurant</div>
