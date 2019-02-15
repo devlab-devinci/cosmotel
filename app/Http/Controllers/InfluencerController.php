@@ -2,27 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Kitchen;
+use App\Service;
 use Illuminate\Http\Request;
 use App\User;
 use App\Restaurant;
 use App\Reservation;
 use App\Discount;
 use Auth;
+use Illuminate\Support\Facades\Log;
 
 class InfluencerController extends Controller
 {
     public function search(Request $request)
     {
-        // TODO: Apply more query parameters
+        $kitchens = Kitchen::all();
+        $services = Service::all();
 
-        $restaurants = Restaurant::where('status', '=', 'public')->simplePaginate(10);
+        $query = Restaurant::query();
+
+        Log::alert($request->kitchens);
+        Log::alert(['aut','dolorem']);
+        Log::alert('ICI');
+        Log::alert($request === ['aut','dolorem']);
+
+        if ($request->kitchens) {
+
+            $query->whereHas('kitchens', function ($query) use($request) {
+                $query->whereIn('slug', $request->kitchens);
+            });
+        }
+
+        if ($request->services) {
+            $query->whereHas('services', function ($query) use($request) {
+                $query->whereIn('slug', $request->services);
+            });
+        }
+
+        $query->where('status', '=', 'public');
+
+        $restaurants = $query->paginate(8);
 
         if ($request->ajax()) {
+
+            Log::alert($restaurants);
+
             $view = view('influencer.restaurant.list',compact('restaurants'))->render();
             return response()->json(['html'=>$view]);
         }
-
-        return view('influencer.search', compact('restaurants'));
+        return view('influencer.search', compact('restaurants','kitchens', 'services'));
     }
 
 
