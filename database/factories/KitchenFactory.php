@@ -3,8 +3,16 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Kitchen::class, function (Faker $faker) {
+
+    static $number = 0;
+
+    $number++;
+
+    $kitchens = ['Francais', 'Indien', 'Sushi', 'Japonais', 'Libanais', 'Grec', 'Korean', 'Italien', 'Pizza', 'Burger'];
+    $slugs = ['francais', 'indien', 'sushu', 'japonais', 'libanais', 'grec', 'korean', 'italien', 'pizza', 'burger'];
+
     return [
-        'label' => $faker->words(2, true),
-        'slug' => $faker->word
+        'label' => $kitchens[$number],
+        'slug' => $slugs[$number]
     ];
 });

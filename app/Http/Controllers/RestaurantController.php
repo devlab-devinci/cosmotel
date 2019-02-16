@@ -75,7 +75,7 @@ class RestaurantController extends Controller
 
 
         if ($request->hasFile('images')) {
-            $destinationPath = 'public/uploads';
+            $destinationPath = 'public/uploads/' . $restaurateur->id . '/' . $restaurant->id;
 
             foreach ($request->file('images') as $image) {
 

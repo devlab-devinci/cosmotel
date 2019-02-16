@@ -21,11 +21,6 @@ class InfluencerController extends Controller
 
         $query = Restaurant::query();
 
-        Log::alert($request->kitchens);
-        Log::alert(['aut','dolorem']);
-        Log::alert('ICI');
-        Log::alert($request === ['aut','dolorem']);
-
         if ($request->kitchens) {
 
             $query->whereHas('kitchens', function ($query) use($request) {
@@ -39,13 +34,20 @@ class InfluencerController extends Controller
             });
         }
 
+        if ($request->lat && $request->long && $request->distance) {
+
+            Log::alert($request->lat);
+            Log::alert($request->long);
+            Log::alert($request->distance);
+
+            $query->isWithinRadius($request->lat, $request->long, $request->distance);
+        }
+
         $query->where('status', '=', 'public');
 
         $restaurants = $query->paginate(8);
 
         if ($request->ajax()) {
-
-            Log::alert($restaurants);
 
             $view = view('influencer.restaurant.list',compact('restaurants'))->render();
             return response()->json(['html'=>$view]);

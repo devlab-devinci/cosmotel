@@ -36,6 +36,30 @@
               @endif
           </div>
       </div>
+    <div class="form-group row">
+        <label for="kitchens" class="col-md-4 col-form-label text-md-right">Around me</label>
+        <div class="col-md-6">
+            <select id="distance" name="distance">
+                <option value="false">Clear</option>
+                <option value="1">1 km</option>
+                <option value="2">2 km</option>
+                <option value="3">3 km</option>
+                <option value="4">4 km</option>
+                <option value="5">5 km</option>
+                <option value="10">10 km</option>
+                <option value="15">15 km</option>
+                <option value="20">20 km</option>
+                <option value="2000">2000 km</option>
+                <option value="8000">8000 km</option>
+            </select>
+
+            @if ($errors->has('distance'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('distance') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
     <div class="form-group row mb-0">
       <div class="col-md-6 offset-md-4">
         <button class="btn btn-primary">
@@ -60,7 +84,9 @@
     var page = 1,
         stop = false,
         kitchens = [],
-        services = [];
+        services = [],
+        aroundDistance,
+        long, lat;
 
     // Infinite scroll trigger
     $(window).scroll(function() {
@@ -75,6 +101,35 @@
         changeFilter();
     });
 
+    $( document ).ready(function() {
+        initGeolocation();
+    });
+
+    function initGeolocation()
+    {
+        if( navigator.geolocation )
+        {
+            // Call getCurrentPosition with success and failure callbacks
+            navigator.geolocation.getCurrentPosition( success, fail );
+        }
+        else
+        {
+            alert("Sorry, your browser does not support geolocation services.");
+        }
+    }
+
+    function success(position)
+    {
+        long = position.coords.longitude;
+        lat = position.coords.latitude;
+
+        console.log(lat, long);
+    }
+
+    function fail(error) {
+        console.log(error);
+    }
+
     // Build and send request each time the user reach the bottom of the page
     function loadMoreData(page){
 
@@ -82,19 +137,28 @@
 
         if (kitchens.length >= 1) {
             for (var i = 0; i < kitchens.length; i++) {
+                if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
                 url += 'kitchens[]=' + kitchens[i];
-                if (kitchens.length !== i) url += '&'
             }
         }
 
         if (services.length >= 1) {
             for (var y = 0; y < services.length; y++) {
+                if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
                 url += 'services[]=' + services[y];
-                if (services.length !== i) url += '&'
             }
         }
 
+        if (aroundDistance && aroundDistance !== 'Clear' && long && lat) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'distance=' + aroundDistance;
+            url += '&lat=' + lat;
+            url += '&long=' +long;
+        }
+
         url += '&page=' + page;
+
+        console.log(url);
 
       $.ajax(
               {
@@ -126,6 +190,8 @@
         kitchens = [];
         services = [];
 
+        aroundDistance = $("#distance").val();
+
         $.each($("input[name='kitchens[]']:checked"), function() {
             kitchens.push($(this).val());
         });
@@ -138,16 +204,23 @@
 
         if (kitchens.length >= 1) {
             for (var i = 0; i < kitchens.length; i++) {
+                if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
                 url += 'kitchens[]=' + kitchens[i];
-                if (kitchens.length !== i) url += '&'
             }
         }
 
         if (services.length >= 1) {
             for (var y = 0; y < services.length; y++) {
+                if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
                 url += 'services[]=' + services[y];
-                if (services.length !== i) url += '&'
             }
+        }
+
+        if (aroundDistance && aroundDistance !== 'false' && long && lat) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'distance=' + aroundDistance;
+            url += '&lat=' + lat;
+            url += '&long=' +long;
         }
 
         console.log(url);

@@ -49,6 +49,12 @@
                             </div>
                         </li>
                     @else
+                        @if (Auth::user()->influencer)
+                            <li class="nav-item"><a class="nav-link" href="{{ route('influencer::search') }}">Search</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('influencer::reservation.list') }}">My reservations</a></li>
+                        @elseif (Auth::user()->restaurateur)
+                            <li class="nav-item"><a class="nav-link" href="{{ route('restaurateur::dashboard') }}">Dashboard</a></li>
+                        @endif
                         <li class="nav-item dropdown">
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                               {{ Auth::user()->firstname }} <span class="caret"></span>

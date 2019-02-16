@@ -3,13 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use App\Kitchen;
 use App\Service;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Restaurant extends Model
 {
     protected $fillable = [
-        'restaurateur_id', 'name', 'address', 'description', 'latitude', 'longitude', 'title'
+        'restaurateur_id', 'name', 'address', 'description', 'latitude', 'longitude', 'title', 'id'
     ];
 
     /**
@@ -85,5 +89,28 @@ class Restaurant extends Model
     public function images()
     {
         return $this->hasMany('App\Image', 'restaurant_id');
+    }
+
+    /**
+     * Scope a query to find restaurant by distance to a location.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  mixed $lat
+     * @param  mixed $lng
+     * @param  mixed $radius
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIsWithinRadius($query, $lat, $lng, $radius)
+    {
+        $haversine = "(6378 * acos(cos(radians(" . $lat . ")) 
+                    * cos(radians(`latitude`)) 
+                    * cos(radians(`longitude`) 
+                    - radians(" . $lng . ")) 
+                    + sin(radians(" . $lat . ")) 
+                    * sin(radians(`latitude`))))";
+
+        return $query->select('*')
+            ->selectRaw("{$haversine} AS distance")
+            ->whereRaw("{$haversine} < ?", [$radius]);
     }
 }

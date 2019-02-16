@@ -48,7 +48,7 @@ class RegisterController extends Controller
     public function redirectTo()
     {
         if (Auth::user()->type == 0) {
-            return route('restaurateur::search');
+            return route('restaurateur::dashboard');
         } else if (Auth::user()->type == 1) {
             return route('influencer::search');
         }
