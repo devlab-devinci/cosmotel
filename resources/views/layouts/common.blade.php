@@ -23,13 +23,15 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="{{ route('guest::service') }}">Service</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{ route('guest::blog') }}">Blog</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{ route('guest::contact') }}">Contact</a></li>
 				  	@if (Auth::user()->influencer)
-				    	<li class="nav-item"><a class="nav-link" href="{{ route('influencer::search') }}">Recherche</a></li>
+				    	<li class="nav-item"><a class="nav-link" href="{{ route('influencer::search') }}">Search</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ route('influencer::reservation.list') }}">My reservations</a></li>
 				  	@elseif (Auth::user()->restaurateur)
-				    	<li class="nav-item"><a class="nav-link" href="#">Annonce</a></li>
+				    	<li class="nav-item"><a class="nav-link" href="{{ route('influencer::dashboard') }}">Dashboard</a></li>
 				  	@endif
-				  	<li class="nav-item"><a class="nav-link" href="#">Mes réservations</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
 				  	<li class="nav-item dropdown">
 				      	<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 				          	{{ Auth::user()->firstname }} <span class="caret"></span>
@@ -50,8 +52,6 @@
 				          	</form>
 				      	</div>
 				  	</li>
-				  	<li class="nav-item"><a class="nav-link" href="#">Helps</a></li>
-				  	<li class="nav-item m-l-20"><a class="nav-link" href="#">Notifs</a></li>
 				</ul>
 			</div>
         </div>
