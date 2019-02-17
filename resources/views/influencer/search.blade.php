@@ -37,7 +37,7 @@
           </div>
       </div>
     <div class="form-group row">
-        <label for="kitchens" class="col-md-4 col-form-label text-md-right">Around me</label>
+        <label for="distance" class="col-md-4 col-form-label text-md-right">Around me</label>
         <div class="col-md-6">
             <select id="distance" name="distance">
                 <option value="false">Clear</option>
@@ -60,6 +60,45 @@
             @endif
         </div>
     </div>
+
+    <div class="form-group row">
+        <label for="discount" class="col-md-4 col-form-label text-md-right">Minimum discount</label>
+        <div class="col-md-6">
+            <select id="discount" name="discount">
+                <option value="false">Clear</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
+
+            @if ($errors->has('discount'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('discount') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="eligible" class="col-md-4 col-form-label text-md-right">I'm eligible</label>
+        <div class="col-md-6">
+            <input id="eligible" type="checkbox" name="eligible">
+
+            @if ($errors->has('eligible'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('eligible') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group row mb-0">
       <div class="col-md-6 offset-md-4">
         <button class="btn btn-primary">
@@ -86,7 +125,8 @@
         kitchens = [],
         services = [],
         aroundDistance,
-        long, lat;
+        userLong, userLat,
+        long, lat, eligible, discount;
 
     // Infinite scroll trigger
     $(window).scroll(function() {
@@ -120,10 +160,8 @@
 
     function success(position)
     {
-        long = position.coords.longitude;
-        lat = position.coords.latitude;
-
-        console.log(lat, long);
+        long = userLong = position.coords.longitude;
+        lat = userLat = position.coords.latitude;
     }
 
     function fail(error) {
@@ -149,11 +187,21 @@
             }
         }
 
-        if (aroundDistance && aroundDistance !== 'Clear' && long && lat) {
+        if (aroundDistance && aroundDistance !== 'false' && long && lat) {
             if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
             url += 'distance=' + aroundDistance;
             url += '&lat=' + lat;
             url += '&long=' +long;
+        }
+
+        if (discount && discount !== 'false') {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'discount=' + discount;
+        }
+
+        if (eligible) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'eligible=true';
         }
 
         url += '&page=' + page;
@@ -200,6 +248,10 @@
             services.push($(this).val());
         });
 
+        discount = $("#discount").val();
+
+        eligible = $("#eligible").is(':checked');
+
         var url = '?';
 
         if (kitchens.length >= 1) {
@@ -221,6 +273,17 @@
             url += 'distance=' + aroundDistance;
             url += '&lat=' + lat;
             url += '&long=' +long;
+        }
+
+
+        if (discount && discount !== 'false') {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'discount=' + discount;
+        }
+
+        if (eligible) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'eligible=true';
         }
 
         console.log(url);
