@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Service::class, function (Faker $faker) {
 
-    static $number = 0;
+    static $number = -1;
 
     $number++;
 

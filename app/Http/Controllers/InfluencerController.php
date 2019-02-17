@@ -35,12 +35,32 @@ class InfluencerController extends Controller
         }
 
         if ($request->lat && $request->long && $request->distance) {
-
-            Log::alert($request->lat);
-            Log::alert($request->long);
-            Log::alert($request->distance);
-
             $query->isWithinRadius($request->lat, $request->long, $request->distance);
+        }
+
+        if ($request->discount || $request->eligible) {
+
+            if ($request->discount) {
+                $discount = $request->discount;
+            }
+            else {
+                $discount = 0;
+            }
+
+            if ($request->eligible) {
+                $followers = Auth::user()->influencer->followers;
+            }
+            else {
+                $followers = 999999999999;
+            }
+
+            Log::alert($followers);
+            Log::alert($discount);
+
+            $query->whereHas('discounts', function ($query) use($followers, $discount) {
+                $query->where('discount', '>=', $discount);
+                $query->where('subscribers', '<=', $followers);
+            }, '>=', 1);
         }
 
         $query->where('status', '=', 'public');

@@ -40,6 +40,6 @@ class CreateOpeningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('opening');
+        Schema::dropIfExists('openings');
     }
 }

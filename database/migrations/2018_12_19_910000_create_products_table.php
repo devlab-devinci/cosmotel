@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10,2);
             $table->string('currency')->nullable();
             $table->timestamps();
-
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
             $table->foreign('category_id')->references('id')->on('product_categories');
         });
@@ -34,6 +33,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 }
