@@ -99,6 +99,19 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label for="dateTime" class="col-md-4 col-form-label text-md-right">Reservation time</label>
+        <div class="col-md-6">
+            <input id="dateTime" type="datetime-local" name="dateTime">
+
+            @if ($errors->has('dateTime'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('dateTime') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group row mb-0">
       <div class="col-md-6 offset-md-4">
         <button class="btn btn-primary">
@@ -126,7 +139,7 @@
         services = [],
         aroundDistance,
         userLong, userLat,
-        long, lat, eligible, discount;
+        long, lat, eligible, discount, day, time, dayTime;
 
     // Infinite scroll trigger
     $(window).scroll(function() {
@@ -204,6 +217,13 @@
             url += 'eligible=true';
         }
 
+        if (day && time && dayTime) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'day=' + day;
+            url += '&time=' + time;
+            url += '&dayTime=' + dayTime;
+        }
+
         url += '&page=' + page;
 
         console.log(url);
@@ -252,6 +272,22 @@
 
         eligible = $("#eligible").is(':checked');
 
+        var temp =  new Date($("#dateTime").val());
+
+        day = temp.getDay();
+
+        time = temp.getHours() + "-" + temp.getMinutes();
+
+        if (temp.getHours() < 12) {
+            dayTime = "morning";
+        }
+        else if (dayTime >= 12 && dayTime < 18){
+            dayTime = "lunch";
+        }
+        else {
+            dayTime = "dinner"
+        }
+
         var url = '?';
 
         if (kitchens.length >= 1) {
@@ -284,6 +320,13 @@
         if (eligible) {
             if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
             url += 'eligible=true';
+        }
+
+        if (day && time) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'day=' + day;
+            url += '&time=' + time;
+            url += '&dayTime=' + dayTime;
         }
 
         console.log(url);

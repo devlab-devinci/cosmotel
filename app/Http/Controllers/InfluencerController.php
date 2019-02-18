@@ -54,12 +54,23 @@ class InfluencerController extends Controller
                 $followers = 999999999999;
             }
 
-            Log::alert($followers);
-            Log::alert($discount);
-
             $query->whereHas('discounts', function ($query) use($followers, $discount) {
                 $query->where('discount', '>=', $discount);
                 $query->where('subscribers', '<=', $followers);
+            }, '>=', 1);
+        }
+
+        if ($request->day && $request->time && $request->dayTime)  {
+
+            Log::alert($request->day - 1);
+            Log::alert($request->time);
+            Log::alert($request->dayTime);
+
+            $query->whereHas('openings', function ($query) use($request) {
+                $query->where('day', $request->day - 1);
+                $query->where('open_'.$request->dayTime, 1);
+                $query->whereTime('open_time_'.$request->dayTime, '<=', $request->time);
+                $query->whereTime('close_time_'.$request->dayTime, '>=', $request->time);
             }, '>=', 1);
         }
 
