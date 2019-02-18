@@ -99,12 +99,54 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label for="dateTime" class="col-md-4 col-form-label text-md-right">Reservation time</label>
+        <div class="col-md-6">
+            <input id="dateTime" type="datetime-local" name="dateTime">
+
+            @if ($errors->has('dateTime'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('dateTime') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="average_price" class="col-md-4 col-form-label text-md-right">Maximum average price</label>
+        <div class="col-md-6">
+            <select id="average_price" name="average_price">
+                <option value="false">Clear</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="false">100</option>
+                <option value="false">+100</option>
+            </select>
+
+            @if ($errors->has('average_price'))
+                <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('average_price') }}</strong>
+          </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group row mb-0">
       <div class="col-md-6 offset-md-4">
         <button class="btn btn-primary">
           Search
         </button>
       </div>
+    </div>
+    <div style="height: 400px" class="p-t-20">
+        <div style="height: 100%;" id="map"></div>
     </div>
 
   <div class="p-t-20">
@@ -119,6 +161,34 @@
 @endsection
 
 @section('js')
+    <script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+
+
+            @foreach($restaurants as $restaurant)
+            var lat = {{$restaurant->latitude}};
+            var lng = {{$restaurant->longitude}};
+
+            var markerLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+
+
+            var mark = new google.maps.Marker({
+                map: map,
+                position: markerLatlng
+            });
+
+            @endforeach
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDehXYVJfhFInggSvKSj2ZVqgD2z0OFCrQ&callback=initMap"
+            async defer></script>
+
   <script type="text/javascript">
     var page = 1,
         stop = false,
@@ -126,7 +196,7 @@
         services = [],
         aroundDistance,
         userLong, userLat,
-        long, lat, eligible, discount;
+        long, lat, eligible, discount, day, time, dayTime, averagePrice;
 
     // Infinite scroll trigger
     $(window).scroll(function() {
@@ -142,6 +212,7 @@
     });
 
     $( document ).ready(function() {
+        initMap()
         initGeolocation();
     });
 
@@ -204,6 +275,18 @@
             url += 'eligible=true';
         }
 
+        if (day && time && dayTime) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'day=' + day;
+            url += '&time=' + time;
+            url += '&dayTime=' + dayTime;
+        }
+
+        if (averagePrice) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'average_price=' + averagePrice;
+        }
+
         url += '&page=' + page;
 
         console.log(url);
@@ -219,6 +302,8 @@
               })
               .done(function(data)
               {
+                  console.log(data);
+
                 if(data.html === "" || data.html === " " || !data.html){
                     stop = true;
                   $('.ajax-load').html("No more records found");
@@ -252,6 +337,24 @@
 
         eligible = $("#eligible").is(':checked');
 
+        var temp =  new Date($("#dateTime").val());
+
+        day = temp.getDay();
+
+        time = temp.getHours() + "-" + temp.getMinutes();
+
+        if (temp.getHours() < 12) {
+            dayTime = "morning";
+        }
+        else if (dayTime >= 12 && dayTime < 18){
+            dayTime = "lunch";
+        }
+        else {
+            dayTime = "dinner"
+        }
+
+        averagePrice = $("#average_price").val();
+
         var url = '?';
 
         if (kitchens.length >= 1) {
@@ -284,6 +387,18 @@
         if (eligible) {
             if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
             url += 'eligible=true';
+        }
+
+        if (day && time) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'day=' + day;
+            url += '&time=' + time;
+            url += '&dayTime=' + dayTime;
+        }
+
+        if (averagePrice) {
+            if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
+            url += 'average_price=' + averagePrice;
         }
 
         console.log(url);

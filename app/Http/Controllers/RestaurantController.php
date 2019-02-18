@@ -114,7 +114,7 @@ class RestaurantController extends Controller
             return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
         }
         else {
-            return view('restaurant.show', ['restaurant' => $restaurant]);
+            return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
         }
     }
 
@@ -130,7 +130,7 @@ class RestaurantController extends Controller
         $kitchens = Kitchen::all();
         $services = Service::all();
 
-        return view('restaurant.edit', ['kitchens' => $kitchens, "services" => $services, "current_restaurant" => $restaurant]);
+        return view('restaurateur.restaurant.edit', ['kitchens' => $kitchens, "services" => $services, "current_restaurant" => $restaurant]);
     }
 
     /**
@@ -148,6 +148,7 @@ class RestaurantController extends Controller
         $restaurant->description = $request->description;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
+        $restaurant->status = $request->status;
         $restaurant->update();
 
         $services = Service::find($request->services);
@@ -156,7 +157,7 @@ class RestaurantController extends Controller
         $kitchens = Service::find($request->kitchens);
         $restaurant->kitchens()->sync($kitchens);
 
-        return view('restaurant.show', ['restaurant' => $restaurant]);
+        return view('restaurateur.restaurant.show', ['restaurant' => $restaurant]);
     }
 
     /**
