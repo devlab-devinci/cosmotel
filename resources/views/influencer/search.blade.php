@@ -186,7 +186,7 @@
             @endforeach
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDehXYVJfhFInggSvKSj2ZVqgD2z0OFCrQ&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap"
             async defer></script>
 
   <script type="text/javascript">
