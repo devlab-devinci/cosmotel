@@ -7,6 +7,7 @@ use App\Restaurant;
 use App\ProductCategory;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -32,7 +33,17 @@ class ProductController extends Controller
 
         if (Auth::user()->restaurateur->id == $restaurant->restaurateur_id) {
 
+            $averageCalculator = (object)[];
+
             foreach($request->products as $product) {
+
+                Log::alert($product);
+
+                if (!isset($averageCalculator->{$product['category_id']})) {
+                    $averageCalculator->{$product['category_id']} = array();
+                }
+
+                array_push($averageCalculator->{$product['category_id']}, $product['price']);
 
                 $newProduct = new Product;
                 $newProduct->restaurant_id = $request->restaurant_id;
@@ -43,6 +54,16 @@ class ProductController extends Controller
 
                 $newProduct->save();
             }
+
+            $average = 0;
+
+            foreach($averageCalculator as $key => $value) {
+
+                $average += array_sum($value) / count($value);
+            }
+
+            $restaurant->average_price = $average;
+            $restaurant->update();
 
             $days = array(
                 (object) [

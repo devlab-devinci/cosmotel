@@ -8,6 +8,7 @@ $factory->define(App\Restaurant::class, function (Faker $faker) {
         'name' => substr($faker->sentence(2), 0, -1),
         'service_interval' => $faker->numberBetween(30, 90),
         'address' => $faker->address,
+        'average_price' => $faker->numberBetween(4, 200),
         'status' => 'public',
         'description' => $faker->paragraph,
         'longitude' => $faker->longitude,

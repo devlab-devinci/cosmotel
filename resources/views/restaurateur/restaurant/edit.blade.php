@@ -52,6 +52,23 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">Status</label>
+
+                            <div class="col-md-6">
+                                <select id="status" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" required autofocus>
+                                    <option value="draft" @if ($current_restaurant->status === "draft") selected @endif>Draft</option>
+                                    <option value="public" @if ($current_restaurant->status === "public") selected @endif>Public</option>
+                                </select>
+
+                                @if ($errors->has('status'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="latitude" class="col-md-4 col-form-label text-md-right">latitude</label>
 
                             <div class="col-md-6">

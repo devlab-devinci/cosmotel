@@ -74,6 +74,11 @@ class InfluencerController extends Controller
             }, '>=', 1);
         }
 
+        if ($request->average_price) {
+
+            $query->where('average_price', '<=', $request->average_price);
+        }
+
         $query->where('status', '=', 'public');
 
         $restaurants = $query->paginate(8);
