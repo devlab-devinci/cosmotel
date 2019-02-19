@@ -47,7 +47,7 @@
                                     <label for="{{ $day->label }}_{{ $time }}-close" class="col-md-2 col-form-label text-md-right">Close time</label>
 
                                     <div class="col-md-2">
-                                        <input id="{{ $day->label }}_{{ $time }}-close" @if($time === "morning") value="12:00" @elseif ($time === "lunch") value="19:00" @else value="19:00" @endif value="23:30" type="time" class="form-control{{ $errors->has($day->label . '_' . $time . '-close') ? ' is-invalid' : '' }}" name="days[{{ $day->index }}][close_time_{{ $time }}]" autofocus>
+                                        <input id="{{ $day->label }}_{{ $time }}-close" @if($time === "morning") value="12:00" @elseif ($time === "lunch") value="19:00" @else value="23:30" @endif type="time" class="form-control{{ $errors->has($day->label . '_' . $time . '-close') ? ' is-invalid' : '' }}" name="days[{{ $day->index }}][close_time_{{ $time }}]" autofocus>
 
                                         @if ($errors->has($day->label . '_' . $time . '-close'))
                                             <span class="invalid-feedback" role="alert">

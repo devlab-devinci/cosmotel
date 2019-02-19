@@ -91,8 +91,9 @@ class InfluencerController extends Controller
     public function showRestaurant($id)
     {
         $restaurant = Restaurant::find($id);
+        $influencer = Auth::user()->influencer;
 
-        return view('influencer.restaurant.show', ['restaurant' => $restaurant]);
+        return view('influencer.restaurant.show', ['restaurant' => $restaurant, 'influencer' => $influencer]);
     }
 
 

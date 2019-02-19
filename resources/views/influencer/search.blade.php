@@ -290,7 +290,7 @@
               {
                   console.log(data);
 
-                if(data.html === "" || data.html === " " || !data.html){
+                  if(data.html === "" || data.html === " " || !data.html || data.html.startsWith('<script')){
                     stop = true;
                   $('.ajax-load').html("No more records found");
                   return;
@@ -405,7 +405,7 @@
             })
             .done(function(data)
             {
-                if(data.html === "" || data.html === " " || !data.html){
+                if(data.html === "" || data.html === " " || !data.html || data.html.startsWith('<script')){
                     stop = true;
                     $('.ajax-load').html("No records found");
                     return;

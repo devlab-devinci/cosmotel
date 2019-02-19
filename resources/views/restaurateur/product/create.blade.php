@@ -36,7 +36,7 @@
                                         <div class="row">
                                             <label for="price" class="col-md-12 col-form-label text-md-right">Price</label>
                                         </div>
-                                        <input id="price" type="text" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="products[1][price]" required autofocus>
+                                        <input id="price" type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="products[1][price]" required autofocus>
 
                                         @if ($errors->has('price'))
                                             <span class="invalid-feedback" role="alert">

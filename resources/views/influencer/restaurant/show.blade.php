@@ -57,9 +57,11 @@
                                 </div>
                                 <select id="discount" class="form-control{{ $errors->has('discount') ? ' is-invalid' : '' }}" name="discount" required autofocus>
                                     @foreach($restaurant->discounts as $discount)
+                                        @if ($discount->subscribers < $influencer->followers)
                                         <option value="{{ $discount->id }}">
                                             {{ $discount->discount }} %, more than {{ $discount->subscribers }}, {{ $discount->stories }} stories, {{ $discount->posts }} posts
                                         </option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @if ($errors->has('discount'))

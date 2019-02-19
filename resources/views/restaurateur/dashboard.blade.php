@@ -23,10 +23,11 @@
                         <a href="{{ route('restaurateur::reservation.show', $reservation->id) }}">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title">{{ $reservation->influencer_id }}</div>
-                                    <div class="card-subtitle mb-2 text-muted">{{ $reservation->restaurant_id }}</div>
-                                    {{ $reservation->client_count }}
-                                    <footer class="blockquote-footer">{{ $reservation->discount }}</footer>
+                                    <div class="card-title">{{ $reservation->status }}</div>
+                                    <div class="card-title">For {{ $reservation->influencer->username}}</div>
+                                    <div class="card-subtitle mb-2 text-muted">For {{ $reservation->client_count }} client</div>
+                                    <div class="card-subtitle mb-2 text-muted">With a {{ $reservation->discount }}% discount</div>
+
                                 </div>
                             </div>
                         </a>
@@ -68,7 +69,6 @@
                         <div class="card-body">
                             <div class="card-title">Register a new restaurant</div>
                             <div class="card-subtitle mb-2 text-muted">Want to promote another restaurant ?</div>
-                                IMG
                             <footer class="blockquote-footer"></footer>
                         </div>
                     </div>
