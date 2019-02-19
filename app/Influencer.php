@@ -28,6 +28,6 @@ class Influencer extends Model
      */
     public function reservations()
     {
-        return $this->hasMany('App\Reservation', 'influencer_id');
+        return $this->hasMany('App\Reservation', 'influencer_id')->orderBy('id','arc');
     }
 }

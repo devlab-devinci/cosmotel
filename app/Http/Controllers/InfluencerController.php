@@ -102,7 +102,7 @@ class InfluencerController extends Controller
         $influencer = Auth::user()->influencer;
         $discount = Discount::find($request->discount);
 
-        $date = new \DateTime($request->date . $request->time);
+        $date = new \DateTime($request->date . ' ' . $request->time);
 
         $reservation = new Reservation;
         $reservation->restaurant_id = $request->restaurant_id;
