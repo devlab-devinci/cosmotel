@@ -62,10 +62,6 @@ class InfluencerController extends Controller
 
         if ($request->day && $request->time && $request->dayTime)  {
 
-            Log::alert($request->day - 1);
-            Log::alert($request->time);
-            Log::alert($request->dayTime);
-
             $query->whereHas('openings', function ($query) use($request) {
                 $query->where('day', $request->day - 1);
                 $query->where('open_'.$request->dayTime, 1);

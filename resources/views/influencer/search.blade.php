@@ -102,7 +102,7 @@
     <div class="form-group row">
         <label for="dateTime" class="col-md-4 col-form-label text-md-right">Reservation time</label>
         <div class="col-md-6">
-            <input id="dateTime" type="datetime-local" name="dateTime">
+            <input id="dateTime" type="datetime-local" name="dateTime" >
 
             @if ($errors->has('dateTime'))
                 <span class="invalid-feedback" role="alert">
@@ -169,24 +169,9 @@
                 center: {lat: -34.397, lng: 150.644},
                 zoom: 8
             });
-
-
-            @foreach($restaurants as $restaurant)
-            var lat = {{$restaurant->latitude}};
-            var lng = {{$restaurant->longitude}};
-
-            var markerLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
-
-
-            var mark = new google.maps.Marker({
-                map: map,
-                position: markerLatlng
-            });
-
-            @endforeach
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwOLVTa0Lja3wxgvOWHhaKJmFy-tKfQM&callback=initMap"
             async defer></script>
 
   <script type="text/javascript">
@@ -212,6 +197,7 @@
     });
 
     $( document ).ready(function() {
+        $('#dateTime').val(new Date());
         initMap()
         initGeolocation();
     });
@@ -282,7 +268,7 @@
             url += '&dayTime=' + dayTime;
         }
 
-        if (averagePrice) {
+        if (averagePrice && averagePrice !== 'false') {
             if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
             url += 'average_price=' + averagePrice;
         }
@@ -396,7 +382,7 @@
             url += '&dayTime=' + dayTime;
         }
 
-        if (averagePrice) {
+        if (averagePrice && averagePrice !== 'false') {
             if (url.slice(-1) !== '&' && url.slice(-1) !== '?') url += '&';
             url += 'average_price=' + averagePrice;
         }
